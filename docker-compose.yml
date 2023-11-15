@@ -12,7 +12,7 @@ services:
       - "./database:/docker-entrypoint-initdb.d"
     networks:
       - LampDocker
-  www:
+  www:        #apache
     depends_on:
       - database
     image: php:8.1.1-apache
@@ -20,8 +20,8 @@ services:
     volumes:
       - "./:/var/www/html"
     ports:
-      - 80:80
-      - 443:443
+      - 80:80     #web
+      - 443:443   #web
     networks:
       - LampDocker
   phpmyadmin:
