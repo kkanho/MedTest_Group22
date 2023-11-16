@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         
         require_once '../config_session.inc.php';
         if ($ERRORS) {
-            $_SESSION['errors_signup'] = $ERRORS;
+            $_SESSION["errors_signup"] = $ERRORS;
 
             //keep users input if they have wrong inputs
             $signupData = [
@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 "email" => $email
             ];
 
-            $_SESSION['signup_data'] = $signupData;
+            $_SESSION["signup_data"] = $signupData;
 
             header("Location: ../../index.php");
             die();

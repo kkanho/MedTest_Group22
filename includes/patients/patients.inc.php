@@ -5,15 +5,16 @@ header("content-type:application/json");
 session_start();//get server session data
 
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
-    if (isset($_SESSION['user_id'])) {//make sure user is logged in
-
+    if (isset($_SESSION["user_id"]) && isset($_SESSION["role"]) && $_SESSION["role"] === "patient") {//make sure user is logged in and their role is patient
+    
         try {
             
             require_once '../dbh.inc.php';
             require_once 'patientsM.inc.php';
+            require_once 'patientsV.inc.php';
 
             //Since user have already logged in, we can assess their username by session
-            $username = $_SESSION['user_username'];
+            $username = $_SESSION["user_username"];
 
 
             $result = getUser($pdo, $username);
@@ -28,13 +29,16 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
         }  catch (PDOException $e) {
             die("Query error: " . $e->getMessage());
         }
+
     } else {
-        header("Location: ../../index.php");
-        die();
+        backToHome();
     }
 
 } else {
+    backToHome();
+}
+
+function backToHome() {
     header("Location: ../../index.php");
     die();
 }
-

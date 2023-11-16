@@ -106,26 +106,29 @@ CREATE TABLE Billing (
     FOREIGN KEY (Order_id) REFERENCES Orders(Order_id)
 );
 
+--Create pre-defined user
+INSERT INTO `Staff` (`Staff_id`, `Staff_name`, `Encrypted_password`, `Email`, `Position`, `Created_at`) VALUES (NULL, 'kan', '$2y$10$4K03dKIEiK28IriSPzguSOnuMF7dukMeYT/cqAkgTIWRVyLbG9DT6', 'kan@gmail.com', 'Secretaries', CURRENT_TIMESTAMP);
+
 -- Lab_staff Role 
 CREATE ROLE Lab_staff;
-CREATE USER xxxx IDENTIFIED BY 'xxxxx';
-GRANT Lab_staff TO xxxx;
 GRANT SELECT, INSERT, UPDATE, DELETE ON Tests TO Lab_staff;
 GRANT SELECT, INSERT, UPDATE, DELETE ON Appointments TO Lab_staff;
 GRANT SELECT, INSERT, UPDATE, DELETE ON Results TO Lab_staff;
+-- CREATE USER xxxx IDENTIFIED BY 'xxxxx';
+-- GRANT Lab_staff TO xxxx;
 
 -- Secretaries Role
 CREATE ROLE Secretaries;
-CREATE USER xxxx IDENTIFIED BY 'xxxxx';
-GRANT Secretaries TO xxxx;
 GRANT SELECT, INSERT, UPDATE, DELETE ON Appointments TO Secretaries;
 GRANT SELECT, INSERT, UPDATE, DELETE ON Billing TO Secretaries;
 GRANT SELECT, INSERT, UPDATE, DELETE ON Results TO Secretaries;
+-- CREATE USER xxxx IDENTIFIED BY 'xxxxx';
+-- GRANT Secretaries TO xxxx;
 
 -- Patients Role
 CREATE ROLE Patients;
-CREATE USER xxxx IDENTIFIED BY 'xxxxx';
-GRANT Patients TO xxxx;
 GRANT SELECT ON Orders TO Patients;
 GRANT SELECT ON Billing TO Patients;
 GRANT SELECT ON Results TO Patients;
+-- CREATE USER xxxx IDENTIFIED BY 'xxxxx';
+-- GRANT Patients TO xxxx;

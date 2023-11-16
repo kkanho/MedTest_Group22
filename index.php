@@ -22,9 +22,8 @@
 
     <div class="container <?php if(!isset($_SESSION["user_id"])) { //user NOT Login ?>center-screen <?php } ?>">
         <script>
-            //delete before submit
             var session = <?php echo json_encode($_SESSION) ?>;
-            console.log(session);
+            console.log(session); //delete this line before submit
         </script>
 
         <?php if(!isset($_SESSION["user_id"])) { //user NOT Login ?>
@@ -62,10 +61,16 @@
                                 <input class="form-control" id="password" name="password" placeholder="Password">
                                 <label for="password" class="form-label">Password</label>
                             </div>
+                            <div class="pb-2" >
+                                <select class="form-select" id="role" name="role" style="height:3.5rem;">
+                                    <option selected value="1">Patients</option>
+                                    <option value="2">Staff</option>
+                                </select>
+                            </div>
                             <?php //checkLoginErrors(); ?>
                             <div class="d-flex justify-content-center">
                                 <button class="btn btn-outline-primary w-100 mb-2" id="loginBtn">Login</button>
-                            </div>    
+                            </div>
                         </form>
                         <span>
                             Don't have an account?
@@ -79,9 +84,7 @@
             <!-- show required data depends on user_role-->
             <!-- Print there personal info -->
 
-            <button class="btn btn-outline-primary mt-4 mb-4" id="usersData">Fetch data</button>
-            
-            <?php showPatientInfo() ?>
+            <?php patientPersonalInfo() ?>
             
         <?php } ?>
 
