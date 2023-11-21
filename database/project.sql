@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `lamp_docker`
+-- Database: lamp_docker
 --
 
 -- --------------------------------------------------------
@@ -106,15 +106,25 @@ CREATE TABLE Billing (
     FOREIGN KEY (Order_id) REFERENCES Orders(Order_id)
 );
 
---Create pre-defined user
-INSERT INTO `Staff` (`Staff_id`, `Staff_name`, `Encrypted_password`, `Email`, `Position`, `Created_at`) VALUES (NULL, 'kan', '$2y$10$4K03dKIEiK28IriSPzguSOnuMF7dukMeYT/cqAkgTIWRVyLbG9DT6', 'kan@gmail.com', 'Secretaries', CURRENT_TIMESTAMP);
+-- Create pre-defined patient user
+INSERT INTO Patients (Patient_id, Patient_name, Encrypted_password, Email, DOB, Insurance, Created_at) VALUES (NULL, "kan", "$2y$10$4K03dKIEiK28IriSPzguSOnuMF7dukMeYT/cqAkgTIWRVyLbG9DT6", "kan@gmail.com", NULL, NULL, CURRENT_TIMESTAMP);
+
+-- Create pre-defined staff user
+INSERT INTO Staff (Staff_id, Staff_name, Encrypted_password, Email, Position, Created_at) VALUES (NULL, "kan", "$2y$10$4K03dKIEiK28IriSPzguSOnuMF7dukMeYT/cqAkgTIWRVyLbG9DT6", "kan@gmail.com", "secretaries", CURRENT_TIMESTAMP), (NULL, "theo", "$2y$10$1L6ClloeqSAmJCKy67YDE.jDE7w3oRlFvfXMWnP326kRWMQ6a2mri", "theo@gmail.com", "lab_staff", CURRENT_TIMESTAMP);
+
+-- Create dummy row
+INSERT INTO Tests (Test_id, Test_code, Test_name, Description, Cost) VALUES (NULL, "test001", "A-Test", "A-Test is just a test", "1000"), (NULL, "test002", "B-Test", "B-Test is just another test", "5000");
+INSERT INTO Orders (Order_id, Order_date, Status, Patient_id, Test_id, Staff_id) VALUES (NULL, "2023-11-15", "Done", "1", "1", "1"), (NULL, "2023-11-20", "Pending", "1", "2", "1");
+INSERT INTO Results (Result_id, Report_url, Interpretation, Order_id, Staff_id) VALUES (NULL, "https://github.com/kkanho", "1st Dummy interpretation of the result", "1", "1"), (NULL, "https://github.com/kkanho", "2nd Dummy interpretation of the result", "2", "1");
+INSERT INTO Billing (Billing_id, Amount, Payment_Status, Insurance_Status, Order_id) VALUES (NULL, "800", "Paid", "Accepted", "1");
+INSERT INTO `Appointments` (`Appointment_id`, `Sampling_type`, `Appointments_datetime`, `Patient_id`) VALUES (NULL, 'Sampling Type A', '2023-11-08 23:13:46', '1'), (NULL, 'Sampling Type B', '2023-11-20 13:14:46', '1');
 
 -- Lab_staff Role 
 CREATE ROLE Lab_staff;
 GRANT SELECT, INSERT, UPDATE, DELETE ON Tests TO Lab_staff;
 GRANT SELECT, INSERT, UPDATE, DELETE ON Appointments TO Lab_staff;
 GRANT SELECT, INSERT, UPDATE, DELETE ON Results TO Lab_staff;
--- CREATE USER xxxx IDENTIFIED BY 'xxxxx';
+-- CREATE USER xxxx IDENTIFIED BY "xxxxx";
 -- GRANT Lab_staff TO xxxx;
 
 -- Secretaries Role
@@ -122,7 +132,7 @@ CREATE ROLE Secretaries;
 GRANT SELECT, INSERT, UPDATE, DELETE ON Appointments TO Secretaries;
 GRANT SELECT, INSERT, UPDATE, DELETE ON Billing TO Secretaries;
 GRANT SELECT, INSERT, UPDATE, DELETE ON Results TO Secretaries;
--- CREATE USER xxxx IDENTIFIED BY 'xxxxx';
+-- CREATE USER xxxx IDENTIFIED BY "xxxxx";
 -- GRANT Secretaries TO xxxx;
 
 -- Patients Role
@@ -130,5 +140,5 @@ CREATE ROLE Patients;
 GRANT SELECT ON Orders TO Patients;
 GRANT SELECT ON Billing TO Patients;
 GRANT SELECT ON Results TO Patients;
--- CREATE USER xxxx IDENTIFIED BY 'xxxxx';
+-- CREATE USER xxxx IDENTIFIED BY "xxxxx";
 -- GRANT Patients TO xxxx;

@@ -1,5 +1,5 @@
-<?php   //patients page handler
-//Access their test orders and results, as well as their bills
+<?php   //patients test orders handler
+//Access their test orders
 header("content-type:application/json");
 
 session_start();//get server session data
@@ -16,8 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
             //Since user have already logged in, we can assess their username by session
             $username = $_SESSION["user_username"];
 
-
-            $result = getUser($pdo, $username);
+            $result = getUserTestOrder($pdo, $username);
 
             echo json_encode($result);//echo the data allow fetching using JS
 

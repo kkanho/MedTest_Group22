@@ -3,6 +3,8 @@
     require_once 'includes/signup/signupV.inc.php';
     require_once 'includes/login/loginV.inc.php';
     require_once 'includes/patients/patientsV.inc.php';
+    require_once 'includes/labStaff/lab_staffV.inc.php';
+    require_once 'includes/secretaries/secretariesV.inc.php';
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +20,7 @@
 </head>
 <body>
 
-    <?php require_once 'components/navbar.php'?>
+    <?php require_once 'includes/navbar.php'?>
 
     <div class="container <?php if(!isset($_SESSION["user_id"])) { //user NOT Login ?>center-screen <?php } ?>">
         <script>
@@ -84,7 +86,27 @@
             <!-- show required data depends on user_role-->
             <!-- Print there personal info -->
 
-            <?php patientPersonalInfo() ?>
+            <?php 
+                if (isset($_SESSION["role"]) && $_SESSION["role"] === "patient") {
+                    //For patient
+                    patientPersonalInfo();
+                    patientTestOrder();
+                    patientTestResult();
+                    patientBill();
+                } else if (isset($_SESSION["role"]) && $_SESSION["role"] === "lab_staff") {
+                    //For Lab staff
+                    patientsSamplingType();
+                    labTest();
+                    patientsResults();
+                } else if (isset($_SESSION["role"]) && $_SESSION["role"] === "secretaries") {
+                    //For Secretaries
+                    patientsAppointment();
+                    patientsBilling();
+                    sec_PatientsResults();
+                } else {
+                    echo "You don't have permission to access resources! Please contact your administrator.";
+                }
+            ?>
             
         <?php } ?>
 
@@ -136,39 +158,23 @@
                 }
             }
 
-            $("#usersData").click(() => {fetchdatafromdb();})
-            function fetchdatafromdb() {
-                fetch('/includes/patients/patients.inc.php')
-                    .then((response) => {
-                        return response.json();
-                    })
-                    .then((data) => {
-                        console.log(data);
-                        let placeholder = document.querySelector('#data-output');
-                        let out = "";
-                        for(let row of data){
-                            out += `
-                                <tr>
-                                    <th scope="row">${row.Patient_id}</th>
-                                    <td>${checkEmptyBlock(row.Patient_name)}</td>
-                                    <td>${checkEmptyBlock(row.Email)}</td>
-                                    <td>${checkEmptyBlock(row.DOB)}</td>
-                                    <td>${checkEmptyBlock(row.Insurance)}</td>
-                                    <td>${checkEmptyBlock(row.Created_at)}</td>
-                                </tr>
-                            `;
-                        }
-                        placeholder.innerHTML = out;
-                    });
-            }
-
             function checkEmptyBlock(blockData) {
-                if(blockData === undefined){
+                if(blockData === undefined || blockData === null){
                     return '-'
                 } else {
                     return blockData
                 }
             }
+
+            const formatting = new Intl.NumberFormat("hkd", {
+                currency: "USD",
+                style: "currency"
+            })
+
+            document.addEventListener("DOMContentLoaded", function(event) {
+                console.log("DOM fully loaded and parsed");
+            });
+
         </script>
     </div>
 
