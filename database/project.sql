@@ -110,7 +110,9 @@ CREATE TABLE Billing (
 INSERT INTO Patients (Patient_id, Patient_name, Encrypted_password, Email, DOB, Insurance, Created_at) VALUES (NULL, "kan", "$2y$10$4K03dKIEiK28IriSPzguSOnuMF7dukMeYT/cqAkgTIWRVyLbG9DT6", "kan@gmail.com", NULL, NULL, CURRENT_TIMESTAMP);
 
 -- Create pre-defined staff user
-INSERT INTO Staff (Staff_id, Staff_name, Encrypted_password, Email, Position, Created_at) VALUES (NULL, "kan", "$2y$10$4K03dKIEiK28IriSPzguSOnuMF7dukMeYT/cqAkgTIWRVyLbG9DT6", "kan@gmail.com", "secretaries", CURRENT_TIMESTAMP), (NULL, "theo", "$2y$10$1L6ClloeqSAmJCKy67YDE.jDE7w3oRlFvfXMWnP326kRWMQ6a2mri", "theo@gmail.com", "lab_staff", CURRENT_TIMESTAMP);
+INSERT INTO Staff (Staff_id, Staff_name, Encrypted_password, Email, Position, Created_at) VALUES
+ (NULL, "kan", "$2y$10$4K03dKIEiK28IriSPzguSOnuMF7dukMeYT/cqAkgTIWRVyLbG9DT6", "kan@gmail.com", "secretaries", CURRENT_TIMESTAMP), 
+ (NULL, "theo", "$2y$10$1L6ClloeqSAmJCKy67YDE.jDE7w3oRlFvfXMWnP326kRWMQ6a2mri", "theo@gmail.com", "lab_staff", CURRENT_TIMESTAMP);
 
 -- Create dummy row
 INSERT INTO Tests (Test_id, Test_code, Test_name, Description, Cost) VALUES (NULL, "test001", "A-Test", "A-Test is just a test", "1000"), (NULL, "test002", "B-Test", "B-Test is just another test", "5000");
@@ -124,21 +126,21 @@ CREATE ROLE Lab_staff;
 GRANT SELECT, INSERT, UPDATE, DELETE ON Tests TO Lab_staff;
 GRANT SELECT, INSERT, UPDATE, DELETE ON Appointments TO Lab_staff;
 GRANT SELECT, INSERT, UPDATE, DELETE ON Results TO Lab_staff;
--- CREATE USER xxxx IDENTIFIED BY "xxxxx";
--- GRANT Lab_staff TO xxxx;
+CREATE USER 'theo' IDENTIFIED BY 'theo';
+GRANT Lab_staff TO theo;
 
 -- Secretaries Role
 CREATE ROLE Secretaries;
 GRANT SELECT, INSERT, UPDATE, DELETE ON Appointments TO Secretaries;
 GRANT SELECT, INSERT, UPDATE, DELETE ON Billing TO Secretaries;
 GRANT SELECT, INSERT, UPDATE, DELETE ON Results TO Secretaries;
--- CREATE USER xxxx IDENTIFIED BY "xxxxx";
--- GRANT Secretaries TO xxxx;
+CREATE USER 'kan' IDENTIFIED BY 'kan';
+GRANT Secretaries TO kan;
 
 -- Patients Role
 CREATE ROLE Patients;
 GRANT SELECT ON Orders TO Patients;
 GRANT SELECT ON Billing TO Patients;
 GRANT SELECT ON Results TO Patients;
--- CREATE USER xxxx IDENTIFIED BY "xxxxx";
--- GRANT Patients TO xxxx;
+CREATE USER 'chloe' IDENTIFIED BY 'chloe';
+GRANT Patients TO 'chloe';
