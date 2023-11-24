@@ -128,21 +128,21 @@ CREATE ROLE Lab_staff;
 GRANT SELECT, INSERT, UPDATE, DELETE ON Tests TO Lab_staff;
 GRANT SELECT, INSERT, UPDATE, DELETE ON Appointments TO Lab_staff;
 GRANT SELECT, INSERT, UPDATE, DELETE ON Results TO Lab_staff;
--- CREATE USER xxxx IDENTIFIED BY "xxxxx";
--- GRANT Lab_staff TO xxxx;
+CREATE USER 'theo' IDENTIFIED BY 'theo';
+GRANT Lab_staff TO theo;
 
 -- Secretaries Role
 CREATE ROLE Secretaries;
 GRANT SELECT, INSERT, UPDATE, DELETE ON Appointments TO Secretaries;
 GRANT SELECT, INSERT, UPDATE, DELETE ON Billing TO Secretaries;
 GRANT SELECT, INSERT, UPDATE, DELETE ON Results TO Secretaries;
--- CREATE USER xxxx IDENTIFIED BY "xxxxx";
--- GRANT Secretaries TO xxxx;
+CREATE USER 'kan' IDENTIFIED BY 'kan';
+GRANT Secretaries TO kan;
 
 -- Patients Role
 CREATE ROLE Patients;
 GRANT SELECT ON Orders TO Patients;
 GRANT SELECT ON Billing TO Patients;
 GRANT SELECT ON Results TO Patients;
--- CREATE USER xxxx IDENTIFIED BY "xxxxx";
--- GRANT Patients TO xxxx;
+CREATE USER 'chloe' IDENTIFIED BY 'chloe';
+GRANT Patients TO 'chloe';
