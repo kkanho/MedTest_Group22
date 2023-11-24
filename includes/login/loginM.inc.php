@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 function getPatientUser(object $pdo, string $username) {
 
-    $query = "SELECT * FROM Patients WHERE Patient_name = :username;";
+    $query = "SELECT Patient_id, Patient_name, Encrypted_password FROM Patients WHERE Patient_name = :username;";
     
     //prevent SQL injection
     $stmt = $pdo->prepare($query);

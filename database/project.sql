@@ -12,6 +12,7 @@ START TRANSACTION;
 SET time_zone = "+00:00";
 
 
+
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -24,14 +25,14 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 
-
+SET GLOBAL general_log = 'ON';
 
 -- Patients 
 CREATE TABLE Patients (
     Patient_id INT NOT NULL AUTO_INCREMENT,
     Patient_name VARCHAR(100) NOT NULL,     /*username*/
     Encrypted_password VARCHAR(255) NOT NULL,
-    Email VARCHAR(100) NOT NULL,            /*Email as the contact information*/
+    Email VARBINARY(255) NOT NULL,            /*Email as the contact information*/
     DOB DATE,
     Insurance VARCHAR(255),                 /*Null indicates no insurance*/
     Created_at DateTime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -43,7 +44,7 @@ CREATE TABLE Staff (
     Staff_id INT NOT NULL AUTO_INCREMENT,
     Staff_name VARCHAR(100) NOT NULL,
     Encrypted_password VARCHAR(255) NOT NULL,
-    Email VARCHAR(100) NOT NULL,            /*Email as the contact information*/
+    Email VARBINARY(255) NOT NULL,            /*Email as the contact information*/
     Position VARCHAR(100) NOT NULL,             
     Created_at DateTime NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (Staff_id)
@@ -78,7 +79,7 @@ CREATE TABLE Appointments (
     Appointment_id INT NOT NULL AUTO_INCREMENT,
     Sampling_type VARCHAR(100) NOT NULL,
     Appointments_datetime DATETIME NOT NULL,
-    Patient_id INT NOT NULL,
+    Patient_id INT NULL,
     PRIMARY KEY (Appointment_id),
     FOREIGN KEY (Patient_id) REFERENCES Patients(Patient_id)
 );
@@ -88,8 +89,8 @@ CREATE TABLE Results (
     Result_id INT NOT NULL AUTO_INCREMENT,
     Report_url VARCHAR(255) NOT NULL,
     Interpretation VARCHAR(255) NOT NULL,
-    Order_id INT NOT NULL,
-    Staff_id INT NOT NULL,
+    Order_id INT NULL,
+    Staff_id INT NULL,
     PRIMARY KEY (Result_id),
     FOREIGN KEY (Order_id) REFERENCES Orders(Order_id),
     FOREIGN KEY (Staff_id) REFERENCES Staff(Staff_id)
@@ -100,24 +101,27 @@ CREATE TABLE Billing (
     Billing_id INT NOT NULL AUTO_INCREMENT,
     Amount DECIMAL(10, 2) NOT NULL,
     Payment_Status VARCHAR(255) NOT NULL,
-    Insurance_Status VARCHAR(255) NOT NULL,
+    Insurance_Status VARCHAR(255) NULL,
     Order_id INT NOT NULL,
     PRIMARY KEY (Billing_id),
     FOREIGN KEY (Order_id) REFERENCES Orders(Order_id)
 );
 
 -- Create pre-defined patient user
-INSERT INTO Patients (Patient_id, Patient_name, Encrypted_password, Email, DOB, Insurance, Created_at) VALUES (NULL, "kan", "$2y$10$4K03dKIEiK28IriSPzguSOnuMF7dukMeYT/cqAkgTIWRVyLbG9DT6", "kan@gmail.com", NULL, NULL, CURRENT_TIMESTAMP);
+INSERT INTO Patients (Patient_id, Patient_name, Encrypted_password, Email, DOB, Insurance, Created_at) VALUES (NULL, "kan", "$2y$10$4K03dKIEiK28IriSPzguSOnuMF7dukMeYT/cqAkgTIWRVyLbG9DT6", AES_ENCRYPT("kan@gmail.com", "GThKyaCpvHWlh9OW"), NULL, NULL, CURRENT_TIMESTAMP);
 
 -- Create pre-defined staff user
-INSERT INTO Staff (Staff_id, Staff_name, Encrypted_password, Email, Position, Created_at) VALUES (NULL, "kan", "$2y$10$4K03dKIEiK28IriSPzguSOnuMF7dukMeYT/cqAkgTIWRVyLbG9DT6", "kan@gmail.com", "secretaries", CURRENT_TIMESTAMP), (NULL, "theo", "$2y$10$1L6ClloeqSAmJCKy67YDE.jDE7w3oRlFvfXMWnP326kRWMQ6a2mri", "theo@gmail.com", "lab_staff", CURRENT_TIMESTAMP);
+INSERT INTO Staff (Staff_id, Staff_name, Encrypted_password, Email, Position, Created_at) 
+VALUES (NULL, "kan", "$2y$10$4K03dKIEiK28IriSPzguSOnuMF7dukMeYT/cqAkgTIWRVyLbG9DT6", AES_ENCRYPT("kan@gmail.com", "GThKyaCpvHWlh9OW"), "secretaries", CURRENT_TIMESTAMP), 
+(NULL, "chloe", "$2y$10$/mgQjcVRWaBZa5S11wQ2LOHl8l59jDXQczuO13lni1x47wfYdMly6", AES_ENCRYPT("chloe@gmail.com", "GThKyaCpvHWlh9OW"), "secretaries", CURRENT_TIMESTAMP), 
+(NULL, "theo", "$2y$10$1L6ClloeqSAmJCKy67YDE.jDE7w3oRlFvfXMWnP326kRWMQ6a2mri", AES_ENCRYPT("theo@gmail.com", "GThKyaCpvHWlh9OW"), "lab_staff", CURRENT_TIMESTAMP);
 
 -- Create dummy row
 INSERT INTO Tests (Test_id, Test_code, Test_name, Description, Cost) VALUES (NULL, "test001", "A-Test", "A-Test is just a test", "1000"), (NULL, "test002", "B-Test", "B-Test is just another test", "5000");
 INSERT INTO Orders (Order_id, Order_date, Status, Patient_id, Test_id, Staff_id) VALUES (NULL, "2023-11-15", "Done", "1", "1", "1"), (NULL, "2023-11-20", "Pending", "1", "2", "1");
 INSERT INTO Results (Result_id, Report_url, Interpretation, Order_id, Staff_id) VALUES (NULL, "https://github.com/kkanho", "1st Dummy interpretation of the result", "1", "1"), (NULL, "https://github.com/kkanho", "2nd Dummy interpretation of the result", "2", "1");
 INSERT INTO Billing (Billing_id, Amount, Payment_Status, Insurance_Status, Order_id) VALUES (NULL, "800", "Paid", "Accepted", "1");
-INSERT INTO `Appointments` (`Appointment_id`, `Sampling_type`, `Appointments_datetime`, `Patient_id`) VALUES (NULL, 'Sampling Type A', '2023-11-08 23:13:46', '1'), (NULL, 'Sampling Type B', '2023-11-20 13:14:46', '1');
+INSERT INTO `Appointments` (`Appointment_id`, `Sampling_type`, `Appointments_datetime`, `Patient_id`) VALUES (NULL, 'Sampling Type A', '2023-11-08 23:13', '1'), (NULL, 'Sampling Type B', '2023-11-20 13:14', '1');
 
 -- Lab_staff Role 
 CREATE ROLE Lab_staff;

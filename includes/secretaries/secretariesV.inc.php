@@ -7,16 +7,16 @@ function patientsAppointment() {
                 <div class="col-6 col-md-2">
                     <button class="btn btn-outline-primary mt-4 mb-4" id="appointment">All appointment</button>
                 </div>
-                <div class="col-12 col-md-10">
-                    <table class="table">
+                <div class="col-12 col-md-10 table-responsive">
+                <form action="includes/secretaries/appointment.inc.php" method="post" id="insertAppointment">
+                    <table class="table" id="appointmentTable">
                         <thead id="appointment_data_output_head">
                             <tr>
-                                <th scope="col">Appointment_id</th>
-                                <th scope="col">Sampling_type</th>
-                                <th scope="col">Appointments_datetime</th>
-                                <th scope="col">Patient_id</th>
-                                <th scope="col">Patient_name</th>
-                                <th scope="col"></th>
+                                <th scope="col">Appointment ID</th>
+                                <th scope="col">Sampling Type</th>
+                                <th scope="col">Appointments Datetime</th>
+                                <th scope="col">Patient Name</th>
+                                <th scope="col">Patient Email</th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
@@ -24,43 +24,10 @@ function patientsAppointment() {
 
                         </tbody>
                     </table>
+                </form>
                 </div>
             </div>
-            <script type="text/javascript">
-                $("#appointment_data_output_head").hide();
-
-                $("#appointment").click(() => {
-                    $("#appointment_data_output_head").show();
-                    fetch("/includes/secretaries/appointment.inc.php")
-                    .then((response) => {
-                        return response.json();
-                    })
-                    .then((data) => {
-                        console.log(data);
-                        let placeholder = document.querySelector("#appointment_data_output");
-                        let out = "";
-                        for(let row of data){
-                            out += `<tr>
-                                <th style="vertical-align: middle !important;" scope="row">${row.Appointment_id}</th>
-                                <td style="vertical-align: middle !important;">${checkEmptyBlock(row.Sampling_type)}</td>
-                                <td style="vertical-align: middle !important;">${checkEmptyBlock(row.Appointments_datetime)}</td>
-                                <td style="vertical-align: middle !important;">${checkEmptyBlock(row.Patient_id)}</td>
-                                <td style="vertical-align: middle !important;">${checkEmptyBlock(row.Patient_name)}</td>
-                                <td>
-                                    <button type="button" class="btn btn-primary">Edit</button>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-danger">Delete</button>
-                                </td>
-                            </tr>`;
-                        }
-                        placeholder.innerHTML = out;
-                    })
-                    .catch (e => {
-                        console.log("Error:", e)
-                    });
-                })
-            </script>
+            <script type="text/javascript" src="./js/secretaries/appointment.js"></script>
         ';
     }
 }
@@ -71,62 +38,28 @@ function patientsBilling() {
                 <div class="col-6 col-md-2">
                     <button class="btn btn-outline-primary mt-4 mb-4" id="billing">All Billing</button>
                 </div>
-                <div class="col-12 col-md-10">
-                    <table class="table">
-                        <thead id="billing_data_output_head">
-                            <tr>
-                                <th scope="col">Billing_id</th>
-                                <th scope="col">Patient_name</th>
-                                <th scope="col">Amount</th>
-                                <th scope="col">Payment_Status</th>
-                                <th scope="col">Insurance_Status</th>
-                                <th scope="col">Order_id</th>
-                                <th scope="col"></th>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
-                        <tbody class="table-group-divider" id="billing_data_output">
+                <div class="col-12 col-md-10 table-responsive">
+                    <form action="includes/secretaries/billing.inc.php" method="post" id="insertBilling">
+                        <table class="table" id="billingTable">
+                            <thead id="billing_data_output_head">
+                                <tr>
+                                    <th scope="col">Billing ID</th>
+                                    <th scope="col">Patient Name</th>
+                                    <th scope="col">Amount</th>
+                                    <th scope="col">Payment Status</th>
+                                    <th scope="col">Insurance Status</th>
+                                    <th scope="col">Order ID</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider" id="billing_data_output">
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </form>
                 </div>
             </div>
-            <script type="text/javascript">
-                $("#billing_data_output_head").hide();
-
-                $("#billing").click(() => {
-                    $("#billing_data_output_head").show();
-                    fetch("/includes/secretaries/billing.inc.php")
-                    .then((response) => {
-                        return response.json();
-                    })
-                    .then((data) => {
-                        console.log(data);
-                        let placeholder = document.querySelector("#billing_data_output");
-                        let out = "";
-                        for(let row of data){
-                            out += `<tr>
-                                <th style="vertical-align: middle !important;" scope="row">${row.Billing_id}</th>
-                                <td style="vertical-align: middle !important;">${checkEmptyBlock(row.Patient_name)}</td>
-                                <td style="vertical-align: middle !important;">${checkEmptyBlock(row.Amount)}</td>
-                                <td style="vertical-align: middle !important;">${checkEmptyBlock(row.Payment_Status)}</td>
-                                <td style="vertical-align: middle !important;">${checkEmptyBlock(row.Insurance_Status)}</td>
-                                <td style="vertical-align: middle !important;">${checkEmptyBlock(row.Order_id)}</td>
-                                <td>
-                                    <button type="button" class="btn btn-primary">Edit</button>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-danger">Delete</button>
-                                </td>
-                            </tr>`;
-                        }
-                        placeholder.innerHTML = out;
-                    })
-                    .catch (e => {
-                        console.log("Error:", e)
-                    });
-                })
-            </script>
+            <script type="text/javascript" src="./js/secretaries/billing.js"></script>
         ';
     }
 }
@@ -137,15 +70,16 @@ function sec_PatientsResults() {
                 <div class="col-6 col-md-2">
                     <button class="btn btn-outline-primary mt-4 mb-4" id="sec_patientsResults">Patients Result</button>
                 </div>
-                <div class="col-12 col-md-10">
+                <div class="col-12 col-md-10 table-responsive">
                     <table class="table">
                         <thead id="sec_patients_results_head">
                             <tr>
-                                <th scope="col">Result_id</th>
-                                <th scope="col">Report_url</th>
+                                <th scope="col">Result ID</th>
+                                <th scope="col">Report URL</th>
                                 <th scope="col">Interpretation</th>
-                                <th scope="col">Order_id</th>
-                                <th scope="col">Staff_id</th>
+                                <th scope="col">Order ID</th>
+                                <th scope="col">Staff Name</th>
+                                <th scope="col">Staff Email</th>
                             </tr>
                         </thead>
                         <tbody class="table-group-divider" id="sec_patients_results">
@@ -154,35 +88,61 @@ function sec_PatientsResults() {
                     </table>
                 </div>
             </div>
-            <script type="text/javascript">
-                $("#sec_patients_results_head").hide();
-
-                $("#sec_patientsResults").click(() => {
-                    $("#sec_patients_results_head").show();
-                    fetch("/includes/secretaries/sec_PatientsResults.inc.php")
-                    .then((response) => {
-                        return response.json();
-                    })
-                    .then((data) => {
-                        
-                        let placeholder = document.querySelector("#sec_patients_results");
-                        let out = "";
-                        for(let row of data){
-                            out += `<tr>
-                                <th scope="row">${row.Result_id}</th>
-                                <td>${checkEmptyBlock(row.Report_url)}</td>
-                                <td>${checkEmptyBlock(row.Interpretation)}</td>
-                                <td>${checkEmptyBlock(row.Order_id)}</td>
-                                <td>${checkEmptyBlock(row.Staff_id)}</td>
-                            </tr>`;
-                        }
-                        placeholder.innerHTML = out;
-                    })
-                    .catch (e => {
-                        console.log("Error:", e)
-                    });
-                })
-            </script>
+            <script type="text/javascript" src="./js/secretaries/sec_patientsResults.js"></script>
         ';
+    }
+}
+
+function checkInsertAppointmentErrors() {
+    if (isset($_SESSION["errors_insertAppointment"])) {
+        $errors = $_SESSION["errors_insertAppointment"];
+
+        foreach ($errors as $error) {
+            echo '<div class="form-error text-danger mb-2">'. $error . '</div>';
+        }
+
+        unset($_SESSION["errors_insertAppointment"]);
+    } else if(isset($_GET["insertAppointment"])  && $_GET["insertAppointment"] === "success") {
+        echo '<div class="form-error text-success mb-2">Insert patient result successful!</div>';
+    }
+}
+function checkDeleteAppointmentErrors() {
+    if (isset($_SESSION["errors_deleteAppointment"])) {
+        $errors = $_SESSION["errors_deleteAppointment"];
+
+        foreach ($errors as $error) {
+            echo '<div class="form-error text-danger mb-2">'. $error . '</div>';
+        }
+
+        unset($_SESSION["errors_deleteAppointment"]);
+    } else if(isset($_GET["deleteAppointment"])  && $_GET["deleteAppointment"] === "success") {
+        echo '<div class="form-error text-success mb-2">Delete patient result successful!</div>';
+    }
+}
+
+function checkInsertBillingErrors() {
+    if (isset($_SESSION["errors_insertBilling"])) {
+        $errors = $_SESSION["errors_insertBilling"];
+
+        foreach ($errors as $error) {
+            echo '<div class="form-error text-danger mb-2">'. $error . '</div>';
+        }
+
+        unset($_SESSION["errors_insertBilling"]);
+    } else if(isset($_GET["insertBilling"])  && $_GET["insertBilling"] === "success") {
+        echo '<div class="form-error text-success mb-2">Insert billing successful!</div>';
+    }
+}
+function checkDeleteBillingErrors() {
+    if (isset($_SESSION["errors_deleteBilling"])) {
+        $errors = $_SESSION["errors_deleteBilling"];
+
+        foreach ($errors as $error) {
+            echo '<div class="form-error text-danger mb-2">'. $error . '</div>';
+        }
+
+        unset($_SESSION["errors_deleteBilling"]);
+    } else if(isset($_GET["deleteBilling"])  && $_GET["deleteBilling"] === "success") {
+        echo '<div class="form-error text-success mb-2">Delete billing successful!</div>';
     }
 }

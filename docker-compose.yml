@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  database: 
+  database: #mysql
     image: mysql:latest
     environment:
       MYSQL_DATABASE: db
@@ -9,7 +9,9 @@ services:
       MYSQL_PASSWORD: '123123'
       MYSQL_ALLOW_EMPTY_PASSWORD: 1
     volumes:
-      - "./database:/docker-entrypoint-initdb.d"
+      - "./database:/docker-entrypoint-initdb.d" #which runs the project.sql upon container startup
+      - "./database/my.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf"
+      - "./database/log:/var/log/mysql" #mount the log directory
     networks:
       - LampDocker
   www:        #apache

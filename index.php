@@ -121,14 +121,75 @@
                     <?php if(ErrorsInLogin() || ErrorsInSignup()) { ?>
                         <div class="form-error text-danger mb-2" id="toast_header_text">Alert!</div>
                     <?php } else if((isset($_GET["signup"])  && $_GET["signup"] === "success") || (isset($_GET["login"])  && $_GET["login"] === "success")) {?>
-                        <div class="form-error text-success mb-2" id="toast_header_text">Success!</div>
+                        <div class="form-error text-success mb-2" id="toast_header_text">Login Success!</div>
                     <?php } ?>
+
+                    <!-- lab_staff -->
+                    <?php if(isset($_SESSION["errors_insertLabTest"])) {?>
+                        <div class="form-error text-danger mb-2" id="toast_header_text">Alert!</div>
+                    <?php } else if (isset($_GET["insertLabTest"])  && $_GET["insertLabTest"] === "success") { ?>
+                        <div class="form-error text-success mb-2" id="toast_header_text">Insert Success!</div>
+                    <?php }?>
+
+                    <?php if(isset($_SESSION["errors_deleteLabTest"])) {?>
+                        <div class="form-error text-danger mb-2" id="toast_header_text">Alert!</div>
+                    <?php } else if (isset($_GET["deleteLabTest"])  && $_GET["deleteLabTest"] === "success") { ?>
+                        <div class="form-error text-success mb-2" id="toast_header_text">Delete Success!</div>
+                    <?php }?>
+
+
+                    <?php if(isset($_SESSION["errors_insertPatientResult"])) {?>
+                        <div class="form-error text-danger mb-2" id="toast_header_text">Alert!</div>
+                    <?php } else if (isset($_GET["insertPatientResult"])  && $_GET["insertPatientResult"] === "success") { ?>
+                        <div class="form-error text-success mb-2" id="toast_header_text">Insert Success!</div>
+                    <?php }?>
+
+                    <?php if(isset($_SESSION["errors_deletePatientResult"])) {?>
+                        <div class="form-error text-danger mb-2" id="toast_header_text">Alert!</div>
+                    <?php } else if (isset($_GET["deletePatientResult"])  && $_GET["deletePatientResult"] === "success") { ?>
+                        <div class="form-error text-success mb-2" id="toast_header_text">Delete Success!</div>
+                    <?php }?>
+
+                    <!-- secretaries -->
+                    <?php if(isset($_SESSION["errors_insertAppointment"])) {?>
+                        <div class="form-error text-danger mb-2" id="toast_header_text">Alert!</div>
+                    <?php } else if (isset($_GET["insertAppointment"])  && $_GET["insertAppointment"] === "success") { ?>
+                        <div class="form-error text-success mb-2" id="toast_header_text">Insert Success!</div>
+                    <?php }?>
+
+                    <?php if(isset($_SESSION["errors_deleteAppointment"])) {?>
+                        <div class="form-error text-danger mb-2" id="toast_header_text">Alert!</div>
+                    <?php } else if (isset($_GET["deleteAppointment"])  && $_GET["deleteAppointment"] === "success") { ?>
+                        <div class="form-error text-success mb-2" id="toast_header_text">Delete Success!</div>
+                    <?php }?>
+
+
+                    <?php if(isset($_SESSION["errors_insertBilling"])) {?>
+                        <div class="form-error text-danger mb-2" id="toast_header_text">Alert!</div>
+                    <?php } else if (isset($_GET["insertBilling"])  && $_GET["insertBilling"] === "success") { ?>
+                        <div class="form-error text-success mb-2" id="toast_header_text">Insert Success!</div>
+                    <?php }?>
+
+                    <?php if(isset($_SESSION["errors_deleteBilling"])) {?>
+                        <div class="form-error text-danger mb-2" id="toast_header_text">Alert!</div>
+                    <?php } else if (isset($_GET["deleteBilling"])  && $_GET["deleteBilling"] === "success") { ?>
+                        <div class="form-error text-success mb-2" id="toast_header_text">Delete Success!</div>
+                    <?php }?>
                 </strong>
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
             <div class="toast-body">
                 <?php checkLoginErrors(); ?>
                 <?php checkSignupErrors(); ?>
+                <?php checkInsertLabTestErrors(); ?>
+                <?php checkDeleteLabTestErrors(); ?>
+                <?php //checkDeleteSamplingTypeErrors(); ?>
+                <?php checkInsertPatientResultErrors(); ?>
+                <?php checkDeletePatientResultErrors(); ?>
+                <?php checkInsertAppointmentErrors(); ?>
+                <?php checkDeleteAppointmentErrors(); ?>
+                <?php checkInsertBillingErrors(); ?>
+                <?php checkDeleteBillingErrors(); ?>
             </div>
         </div>
         <script>
@@ -152,7 +213,30 @@
 
             function callToast() {
                 const urlParams = new URLSearchParams(window.location.search);
-                if ((session.hasOwnProperty('errors_login') || session.hasOwnProperty('errors_signup') || session.hasOwnProperty('user_id')) && $('#toast_header_text').length || urlParams.get("signup") === "success") {
+                if (
+                    (session.hasOwnProperty('errors_login') || session.hasOwnProperty('errors_signup') || session.hasOwnProperty('user_id')) && $('#toast_header_text').length || 
+                    urlParams.get("signup") === "success" ||
+                    urlParams.get("insertLabTest") === "success" ||
+                    session.hasOwnProperty('errors_insertLabTest' ||
+                    urlParams.get("deleteLabTest") === "success" ||
+                    session.hasOwnProperty('errors_deleteLabTest') ||
+
+                    urlParams.get("insertPatientResult") === "success" ||
+                    session.hasOwnProperty('errors_insertPatientResult') ||
+                    urlParams.get("deletePatientResult") === "success" ||
+                    session.hasOwnProperty('errors_deletePatientResult') ||
+                    
+                    urlParams.get("insertAppointment") === "success" ||
+                    session.hasOwnProperty('errors_insertAppointment') ||
+                    urlParams.get("deleteAppointment") === "success" ||
+                    session.hasOwnProperty('errors_deleteAppointment') ||
+
+                    urlParams.get("insertBilling") === "success" ||
+                    session.hasOwnProperty('errors_insertBilling') ||
+                    urlParams.get("deleteBilling") === "success" ||
+                    session.hasOwnProperty('errors_deleteBilling') 
+                    )
+                ){
                     let bsAlert = new bootstrap.Toast($('#cusTos'));
                     bsAlert.show();
                 }
@@ -166,8 +250,8 @@
                 }
             }
 
-            const formatting = new Intl.NumberFormat("hkd", {
-                currency: "USD",
+            const formatting = new Intl.NumberFormat("zh-HK", {
+                currency: "HKD",
                 style: "currency"
             })
 

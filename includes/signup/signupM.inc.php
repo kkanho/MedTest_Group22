@@ -31,7 +31,9 @@ function getUsername(object $pdo, string $username) {
 
 function setUser($pdo, $username, $password, $email) {
 
-    $query = "INSERT INTO Patients (Patient_name, Encrypted_password, Email) VALUES (:username, :password, :email);";
+    $aesKey = "GThKyaCpvHWlh9OW"; //128bit aes key
+
+    $query = "INSERT INTO Patients (Patient_name, Encrypted_password, Email) VALUES (:username, :password, AES_ENCRYPT(:email, '".$aesKey."') );";
     
     //prevent SQL injection
     $stmt = $pdo->prepare($query);
