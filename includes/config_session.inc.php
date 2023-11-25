@@ -5,7 +5,7 @@ ini_set('session.use_strict_mode', 1);
 
 session_set_cookie_params([
     'lifetime' => 1800,
-    'domain' => 'localhost',
+    'domain' => '.localhost',
     'path' => '/',
     'secure' => true,
     'httponly' => true
@@ -13,17 +13,17 @@ session_set_cookie_params([
 
 session_start();
 
-
-// if (isset($_SESSION["user_id"])) {//user is logged in
-//     if (!isset($_SESSION["lastGen"])) {
-//         genSessionIDLoggedIn();
-//     } else {
-//         $interval = 1800; //update session every 30 minutes
-//         if (time() - $_SESSION["lastGen"] >= $interval) {
-//             genSessionIDLoggedIn();
-//         }
-//     }
-// } else {//user not logged in
+if (isset($_SESSION["user_id"])) {//user is logged in
+    if (!isset($_SESSION["lastGen"])) {
+        genSessionIDLoggedIn(); 
+    } else {
+        $interval = 1800; //update session every 30 minutes
+        if (time() - $_SESSION["lastGen"] >= $interval) {
+            genSessionIDLoggedIn();
+        }
+    }
+} else 
+{//user not logged in
     if (!isset($_SESSION["lastGen"])) {
         genSessionID();
     } else {
@@ -32,19 +32,23 @@ session_start();
             genSessionID();
         }
     }
-// }
+}
 
 
-// function genSessionIDLoggedIn() {
-//     session_regenerate_id(true);
+function genSessionIDLoggedIn() {
+    session_regenerate_id(true);
 
-//     $userID = $_SESSION["user_id"];
-//     $newSessionID = session_create_id();
-//     $sessionID = $newSessionID . "_" . $userID;
-//     session_id($sessionID);
+    $userID = $_SESSION["user_id"];
+    $newSessionID = session_create_id();
+    $sessionID = $newSessionID . "_" . $userID;
 
-//     $_SESSION["lastGen"] = time();
-// }
+    session_unset();
+    session_destroy();
+    session_id($sessionID);
+    session_start();
+
+    $_SESSION["lastGen"] = time();
+}
 
 function genSessionID() {
     session_regenerate_id(true);

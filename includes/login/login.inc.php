@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         } else if ($role === '2') {
             $result = getStaffUser($pdo, $username); //getUser from staff table
         } else {
-            $result = '';
+            $ERRORS["login_incorrect"] = "User not found!";
         }
         
         if (isUsernameWrong($result)) {
@@ -44,17 +44,30 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             die();
         }
 
-        //generate session with id
-        // $newSessionID = session_create_id();
-        // $sessionID = $newSessionID . "_" . $result["user_id"];
-        // session_id($sessionID);
-
         if ($role === '1') { //sign in the user [role = patients]
+            //generate session with id
+            $newSessionID = session_create_id();
+            $sessionID = $newSessionID . "_" . $result["Patient_id"];
+
+            session_unset();
+            session_destroy();
+            session_id($sessionID);
+            session_start();
+
             $_SESSION["user_id"] = $result["Patient_id"];
             $_SESSION["user_username"] = htmlspecialchars($result["Patient_name"]);
             $_SESSION["role"] = 'patient';
             $_SESSION["lastGen"] = time();
         } else if ($role === '2') { //sign in the user [role = staff]
+            //generate session with id
+            $newSessionID = session_create_id();
+            $sessionID = $newSessionID . "_" . $result["Staff_id"];
+
+            session_unset();
+            session_destroy();
+            session_id($sessionID);
+            session_start();
+
             $_SESSION["user_id"] = $result["Staff_id"];
             $_SESSION["user_username"] = htmlspecialchars($result["Staff_name"]);
             $_SESSION["role"] = htmlspecialchars($result["Position"]);

@@ -18,7 +18,7 @@ function getPatientUser(object $pdo, string $username) {
 
 function getStaffUser(object $pdo, string $username) {
     
-    $query = "SELECT * FROM Staff WHERE Staff_name = :username;";
+    $query = "SELECT Staff_id, Staff_name, Encrypted_password, Position FROM Staff WHERE Staff_name = :username;";
     
     //prevent SQL injection
     $stmt = $pdo->prepare($query);

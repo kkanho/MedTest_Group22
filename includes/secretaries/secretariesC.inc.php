@@ -10,7 +10,6 @@ function isInputEmpty(string $Sampling_type, string $Appointments_datetime, stri
         return false;
     }
 }
-
 function userFound(object $pdo, string $Patient_name): bool {
 
     $row = getPatientUserID($pdo, $Patient_name);
@@ -30,7 +29,6 @@ function isBillingInputEmpty(string $Patient_name, string $Amount, string $Payme
         return false;
     }
 }
-
 function orderIDFound(object $pdo, string $Order_id): bool {
 
     $row = getOrderID($pdo, $Order_id);

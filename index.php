@@ -7,6 +7,29 @@
     require_once 'includes/secretaries/secretariesV.inc.php';
 ?>
 
+<?php 
+    $isLogin = isset($_SESSION["user_id"]);
+    $isPatient = isset($_SESSION["role"]) && $_SESSION["role"] === "patient";
+    $isLabStaff = isset($_SESSION["role"]) && $_SESSION["role"] === "lab_staff";
+    $isSecretaries = isset($_SESSION["role"]) && $_SESSION["role"] === "secretaries";
+    $isInsertError = isset($_SESSION["errors_insertLabTest"]) ||
+        isset($_SESSION["errors_insertPatientResult"]) || 
+        isset($_SESSION["errors_insertAppointment"]) || 
+        isset($_SESSION["errors_insertBilling"]);
+    $isDeleteError = isset($_SESSION["errors_deleteLabTest"]) || 
+        isset($_SESSION["errors_deletePatientResult"]) || 
+        isset($_SESSION["errors_deleteAppointment"]) || 
+        isset($_SESSION["errors_deleteBilling"]);
+    $isInsertSuccess = (isset($_GET["insertLabTest"]) && $_GET["insertLabTest"] === "success") || 
+        (isset($_GET["insertPatientResult"]) && $_GET["insertPatientResult"] === "success") ||
+        (isset($_GET["insertAppointment"])  && $_GET["insertAppointment"] === "success") ||
+        (isset($_GET["insertBilling"])  && $_GET["insertBilling"] === "success");
+    $isDeleteSuccess = (isset($_GET["deleteLabTest"])  && $_GET["deleteLabTest"] === "success") ||
+        (isset($_GET["deletePatientResult"])  && $_GET["deletePatientResult"] === "success") ||
+        (isset($_GET["deleteAppointment"])  && $_GET["deleteAppointment"] === "success") ||
+        (isset($_GET["deleteBilling"])  && $_GET["deleteBilling"] === "success");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,20 +38,20 @@
     <script src="/lib/js/bootstrap.bundle.min.js"></script>
     <script src="/lib/jquery-3.7.1.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/lib/css/bootstrap.min.css" /> 
-    <link rel="stylesheet" type="text/css" href="styles.css" /> 
+    <link rel="stylesheet" type="text/css" href="./styles.css" /> 
     <title>Group_22</title>
 </head>
 <body>
 
     <?php require_once 'includes/navbar.php'?>
 
-    <div class="container <?php if(!isset($_SESSION["user_id"])) { //user NOT Login ?>center-screen <?php } ?>">
+    <div class="container <?php if(!$isLogin) { ?>center-screen <?php } ?>">
         <script>
             var session = <?php echo json_encode($_SESSION) ?>;
             console.log(session); //delete this line before submit
         </script>
 
-        <?php if(!isset($_SESSION["user_id"])) { //user NOT Login ?>
+        <?php if(!$isLogin) { ?>
 
             <!-- Signup Form -->
             <div class="container col-sm-10 col-md-7 col-lg-4 mt-4 mb-4" id="signupForm">
@@ -87,18 +110,18 @@
             <!-- Print there personal info -->
 
             <?php 
-                if (isset($_SESSION["role"]) && $_SESSION["role"] === "patient") {
+                if ($isPatient) {
                     //For patient
                     patientPersonalInfo();
                     patientTestOrder();
                     patientTestResult();
                     patientBill();
-                } else if (isset($_SESSION["role"]) && $_SESSION["role"] === "lab_staff") {
+                } else if ($isLabStaff) {
                     //For Lab staff
                     patientsSamplingType();
                     labTest();
                     patientsResults();
-                } else if (isset($_SESSION["role"]) && $_SESSION["role"] === "secretaries") {
+                } else if ($isSecretaries) {
                     //For Secretaries
                     patientsAppointment();
                     patientsBilling();
@@ -124,57 +147,18 @@
                         <div class="form-error text-success mb-2" id="toast_header_text">Login Success!</div>
                     <?php } ?>
 
-                    <!-- lab_staff -->
-                    <?php if(isset($_SESSION["errors_insertLabTest"])) {?>
+                    <?php if($isInsertError) {?>
                         <div class="form-error text-danger mb-2" id="toast_header_text">Alert!</div>
-                    <?php } else if (isset($_GET["insertLabTest"])  && $_GET["insertLabTest"] === "success") { ?>
+                    <?php } else if ($isInsertSuccess) { ?>
                         <div class="form-error text-success mb-2" id="toast_header_text">Insert Success!</div>
                     <?php }?>
 
-                    <?php if(isset($_SESSION["errors_deleteLabTest"])) {?>
+                    <?php if($isDeleteError) {?>
                         <div class="form-error text-danger mb-2" id="toast_header_text">Alert!</div>
-                    <?php } else if (isset($_GET["deleteLabTest"])  && $_GET["deleteLabTest"] === "success") { ?>
+                    <?php } else if ($isDeleteSuccess) { ?>
                         <div class="form-error text-success mb-2" id="toast_header_text">Delete Success!</div>
                     <?php }?>
 
-
-                    <?php if(isset($_SESSION["errors_insertPatientResult"])) {?>
-                        <div class="form-error text-danger mb-2" id="toast_header_text">Alert!</div>
-                    <?php } else if (isset($_GET["insertPatientResult"])  && $_GET["insertPatientResult"] === "success") { ?>
-                        <div class="form-error text-success mb-2" id="toast_header_text">Insert Success!</div>
-                    <?php }?>
-
-                    <?php if(isset($_SESSION["errors_deletePatientResult"])) {?>
-                        <div class="form-error text-danger mb-2" id="toast_header_text">Alert!</div>
-                    <?php } else if (isset($_GET["deletePatientResult"])  && $_GET["deletePatientResult"] === "success") { ?>
-                        <div class="form-error text-success mb-2" id="toast_header_text">Delete Success!</div>
-                    <?php }?>
-
-                    <!-- secretaries -->
-                    <?php if(isset($_SESSION["errors_insertAppointment"])) {?>
-                        <div class="form-error text-danger mb-2" id="toast_header_text">Alert!</div>
-                    <?php } else if (isset($_GET["insertAppointment"])  && $_GET["insertAppointment"] === "success") { ?>
-                        <div class="form-error text-success mb-2" id="toast_header_text">Insert Success!</div>
-                    <?php }?>
-
-                    <?php if(isset($_SESSION["errors_deleteAppointment"])) {?>
-                        <div class="form-error text-danger mb-2" id="toast_header_text">Alert!</div>
-                    <?php } else if (isset($_GET["deleteAppointment"])  && $_GET["deleteAppointment"] === "success") { ?>
-                        <div class="form-error text-success mb-2" id="toast_header_text">Delete Success!</div>
-                    <?php }?>
-
-
-                    <?php if(isset($_SESSION["errors_insertBilling"])) {?>
-                        <div class="form-error text-danger mb-2" id="toast_header_text">Alert!</div>
-                    <?php } else if (isset($_GET["insertBilling"])  && $_GET["insertBilling"] === "success") { ?>
-                        <div class="form-error text-success mb-2" id="toast_header_text">Insert Success!</div>
-                    <?php }?>
-
-                    <?php if(isset($_SESSION["errors_deleteBilling"])) {?>
-                        <div class="form-error text-danger mb-2" id="toast_header_text">Alert!</div>
-                    <?php } else if (isset($_GET["deleteBilling"])  && $_GET["deleteBilling"] === "success") { ?>
-                        <div class="form-error text-success mb-2" id="toast_header_text">Delete Success!</div>
-                    <?php }?>
                 </strong>
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>

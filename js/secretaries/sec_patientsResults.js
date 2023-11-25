@@ -7,7 +7,7 @@ $("#sec_patients_results_head").hide();
         return response.json();
     })
     .then((data) => {
-        console.log(data)
+
         let placeholder = document.querySelector("#sec_patients_results");
         let out = "";
         for(let row of data){

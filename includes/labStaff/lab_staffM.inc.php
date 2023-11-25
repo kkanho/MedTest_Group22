@@ -88,9 +88,9 @@ function deleteLabTest(object $pdo, int $rowIndex) {
 
 
 
-function insertPatientResult(object $pdo, string $Report_url, string $Interpretation) {
+function insertPatientResult(object $pdo, string $Report_url, string $Interpretation, int $Order_id) {
 
-    $query = "INSERT INTO Results (Report_url, Interpretation) VALUES (:Report_url, :Interpretation);";
+    $query = "INSERT INTO Results (Report_url, Interpretation, Order_id) VALUES (:Report_url, :Interpretation, :Order_id);";
     
     //prevent SQL injection
     $stmt = $pdo->prepare($query);
@@ -98,6 +98,7 @@ function insertPatientResult(object $pdo, string $Report_url, string $Interpreta
 
     $stmt->bindParam(":Report_url", $Report_url);
     $stmt->bindParam(":Interpretation", $Interpretation);
+    $stmt->bindParam(":Order_id", $Order_id);
     $stmt->execute();
 
     $result = $stmt->fetch(PDO::FETCH_ASSOC);//get the first result
@@ -117,4 +118,19 @@ function deletePatientResult(object $pdo, int $rowIndex) {
 
     $result = $stmt->fetch(PDO::FETCH_ASSOC);//get the first result
     return $result;
+}
+
+function getOrderID(object $pdo, $Order_id) {
+
+    $query = "SELECT Order_id FROM Orders WHERE Order_id = :Order_id;";
+
+    //prevent SQL injection
+    $stmt = $pdo->prepare($query);
+
+    $stmt->bindParam(":Order_id", $Order_id);
+    $stmt->execute();
+
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);//get the first result
+    return $result;
+
 }

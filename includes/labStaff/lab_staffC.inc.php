@@ -33,6 +33,16 @@ function isURL(string $Report_url): bool {
         return false;
     }
 }
+function orderIDFound(object $pdo, string $Order_id): bool {
+
+    $row = getOrderID($pdo, $Order_id);
+    
+    if ($row) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 
 

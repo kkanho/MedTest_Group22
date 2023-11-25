@@ -86,6 +86,7 @@ if ($postRequest) { //Post request
     if ($dataToResultTable) {//insert data in the result table
         $Report_url = htmlspecialchars($_POST["Report_url"]);
         $Interpretation = htmlspecialchars($_POST["Interpretation"]);
+        $Order_id = htmlspecialchars($_POST["Order_id"]);
 
         try {
             
@@ -103,6 +104,14 @@ if ($postRequest) { //Post request
             if (!isURL($Report_url)) {
                 $ERRORS["not_url"] = 'Please input a valid url!';
             }
+            if (!orderIDFound($pdo, $Order_id)) {
+                $ERRORS["order_id_notFound"] = 'Order ID not found!';
+            }
+            if (!isRowIndexInt($Order_id)) {
+                $ERRORS["order_id_Not_Int"] = 'Order ID not Int!';
+            } else {
+                $Order_id = intval($Order_id);
+            }
 
             if ($ERRORS) {
                 $_SESSION["errors_insertPatientResult"] = $ERRORS;
@@ -111,7 +120,7 @@ if ($postRequest) { //Post request
                 die();
             }
             
-            insertPatientResult($pdo, $Report_url, $Interpretation);
+            insertPatientResult($pdo, $Report_url, $Interpretation, $Order_id);
             header("Location: ../../index.php?insertPatientResult=success"); //redirect
 
             //close the connection

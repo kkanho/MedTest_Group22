@@ -7,7 +7,7 @@ $("#appointment_data_output_head").hide();
         return response.json();
     })
     .then((data) => {
-        console.log(data);
+
         let placeholder = document.querySelector("#appointment_data_output");
         let out = "";
         for(let row of data){
