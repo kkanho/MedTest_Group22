@@ -6,7 +6,7 @@ function getPatientsSamplingType(object $pdo): array {
 
     $query = "SELECT Appointments.Appointment_id, Appointments.Sampling_type, Appointments.Appointments_datetime, Appointments.Patient_id, Patients.Patient_name
     FROM Appointments
-    LEFT JOIN Patients
+    JOIN Patients
     ON Appointments.Patient_id = Patients.Patient_id";
 
     //prevent SQL injection
@@ -88,9 +88,26 @@ function deleteLabTest(object $pdo, int $rowIndex) {
 
 
 
-function insertPatientResult(object $pdo, string $Report_url, string $Interpretation, int $Order_id) {
+// function insertPatientResult(object $pdo, string $Report_url, string $Interpretation, int $Order_id) {
 
-    $query = "INSERT INTO Results (Report_url, Interpretation, Order_id) VALUES (:Report_url, :Interpretation, :Order_id);";
+//     $query = "INSERT INTO Results (Report_url, Interpretation, Order_id) VALUES (:Report_url, :Interpretation, :Order_id);";
+    
+//     //prevent SQL injection
+//     $stmt = $pdo->prepare($query);
+
+
+//     $stmt->bindParam(":Report_url", $Report_url);
+//     $stmt->bindParam(":Interpretation", $Interpretation);
+//     $stmt->bindParam(":Order_id", $Order_id);
+//     $stmt->execute();
+
+//     $result = $stmt->fetch(PDO::FETCH_ASSOC);//get the first result
+//     return $result;
+
+// }
+function insertPatientResult(object $pdo, string $Report_url, string $Interpretation) {
+
+    $query = "INSERT INTO Results (Report_url, Interpretation) VALUES (:Report_url, :Interpretation);";
     
     //prevent SQL injection
     $stmt = $pdo->prepare($query);
@@ -98,7 +115,7 @@ function insertPatientResult(object $pdo, string $Report_url, string $Interpreta
 
     $stmt->bindParam(":Report_url", $Report_url);
     $stmt->bindParam(":Interpretation", $Interpretation);
-    $stmt->bindParam(":Order_id", $Order_id);
+
     $stmt->execute();
 
     $result = $stmt->fetch(PDO::FETCH_ASSOC);//get the first result

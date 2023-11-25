@@ -117,8 +117,6 @@ if ($postRequest) {
                 die();
             }
 
-            $Patient_id = userFound($pdo, $Patient_name);
-
             insertBilling($pdo, $Amount, $Payment_Status, $Insurance_Status, $Order_id);
             header("Location: ../../index.php?insertBilling=success"); //redirect
 

@@ -15,18 +15,26 @@
     $isInsertError = isset($_SESSION["errors_insertLabTest"]) ||
         isset($_SESSION["errors_insertPatientResult"]) || 
         isset($_SESSION["errors_insertAppointment"]) || 
+        isset($_SESSION["errors_insertOrder"]) || 
+        isset($_SESSION["errors_insertResult"]) || 
         isset($_SESSION["errors_insertBilling"]);
     $isDeleteError = isset($_SESSION["errors_deleteLabTest"]) || 
         isset($_SESSION["errors_deletePatientResult"]) || 
         isset($_SESSION["errors_deleteAppointment"]) || 
+        isset($_SESSION["errors_deleteOrder"]) || 
+        isset($_SESSION["errors_deleteResult"]) || 
         isset($_SESSION["errors_deleteBilling"]);
     $isInsertSuccess = (isset($_GET["insertLabTest"]) && $_GET["insertLabTest"] === "success") || 
         (isset($_GET["insertPatientResult"]) && $_GET["insertPatientResult"] === "success") ||
         (isset($_GET["insertAppointment"])  && $_GET["insertAppointment"] === "success") ||
+        (isset($_GET["insertOrder"])  && $_GET["insertOrder"] === "success") ||
+        (isset($_GET["insertResult"])  && $_GET["insertResult"] === "success") ||
         (isset($_GET["insertBilling"])  && $_GET["insertBilling"] === "success");
     $isDeleteSuccess = (isset($_GET["deleteLabTest"])  && $_GET["deleteLabTest"] === "success") ||
         (isset($_GET["deletePatientResult"])  && $_GET["deletePatientResult"] === "success") ||
         (isset($_GET["deleteAppointment"])  && $_GET["deleteAppointment"] === "success") ||
+        (isset($_GET["deleteOrder"])  && $_GET["deleteOrder"] === "success") ||
+        (isset($_GET["deleteResult"])  && $_GET["deleteResult"] === "success") ||
         (isset($_GET["deleteBilling"])  && $_GET["deleteBilling"] === "success");
 ?>
 
@@ -124,8 +132,9 @@
                 } else if ($isSecretaries) {
                     //For Secretaries
                     patientsAppointment();
-                    patientsBilling();
+                    order();
                     sec_PatientsResults();
+                    patientsBilling();
                 } else {
                     echo "You don't have permission to access resources! Please contact your administrator.";
                 }
@@ -174,6 +183,10 @@
                 <?php checkDeleteAppointmentErrors(); ?>
                 <?php checkInsertBillingErrors(); ?>
                 <?php checkDeleteBillingErrors(); ?>
+                <?php checkInsertResultErrors(); ?>
+                <?php checkDeleteResultErrors(); ?>
+                <?php checkInsertOrderErrors(); ?>
+                <?php checkDeleteOrderErrors(); ?>
             </div>
         </div>
         <script>
@@ -214,6 +227,11 @@
                     session.hasOwnProperty('errors_insertAppointment') ||
                     urlParams.get("deleteAppointment") === "success" ||
                     session.hasOwnProperty('errors_deleteAppointment') ||
+
+                    urlParams.get("insertOrder") === "success" ||
+                    session.hasOwnProperty('errors_insertOrder') ||
+                    urlParams.get("deleteOrder") === "success" ||
+                    session.hasOwnProperty('errors_deleteOrder') ||
 
                     urlParams.get("insertBilling") === "success" ||
                     session.hasOwnProperty('errors_insertBilling') ||

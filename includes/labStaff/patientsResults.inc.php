@@ -86,10 +86,11 @@ if ($postRequest) { //Post request
     if ($dataToResultTable) {//insert data in the result table
         $Report_url = htmlspecialchars($_POST["Report_url"]);
         $Interpretation = htmlspecialchars($_POST["Interpretation"]);
-        $Order_id = htmlspecialchars($_POST["Order_id"]);
+        // $Order_id = htmlspecialchars($_POST["Order_id"]);
+        // order id will be add by lab_staff later after submission of result
 
         try {
-            
+
             require_once '../dbh.inc.php';
             require_once 'lab_staffM.inc.php';
             require_once 'lab_staffV.inc.php';
@@ -97,21 +98,21 @@ if ($postRequest) { //Post request
 
             //Handle errors
             $ERRORS = [];
-            
+        
             if (isPRInputEmpty($Report_url, $Interpretation)) {
                 $ERRORS["empty_input"] = 'Please fill in all the required fields for Adding result!';
             }
             if (!isURL($Report_url)) {
                 $ERRORS["not_url"] = 'Please input a valid url!';
             }
-            if (!orderIDFound($pdo, $Order_id)) {
-                $ERRORS["order_id_notFound"] = 'Order ID not found!';
-            }
-            if (!isRowIndexInt($Order_id)) {
-                $ERRORS["order_id_Not_Int"] = 'Order ID not Int!';
-            } else {
-                $Order_id = intval($Order_id);
-            }
+            // if (!orderIDFound($pdo, $Order_id)) {
+            //     $ERRORS["order_id_notFound"] = 'Order ID not found!';
+            // }
+            // if (!isRowIndexInt($Order_id)) {
+            //     $ERRORS["order_id_Not_Int"] = 'Order ID not Int!';
+            // } else {
+            //     $Order_id = intval($Order_id);
+            // }
 
             if ($ERRORS) {
                 $_SESSION["errors_insertPatientResult"] = $ERRORS;
@@ -120,7 +121,8 @@ if ($postRequest) { //Post request
                 die();
             }
             
-            insertPatientResult($pdo, $Report_url, $Interpretation, $Order_id);
+            // insertPatientResult($pdo, $Report_url, $Interpretation, $Order_id);
+            insertPatientResult($pdo, $Report_url, $Interpretation);
             header("Location: ../../index.php?insertPatientResult=success"); //redirect
 
             //close the connection

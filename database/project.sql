@@ -33,8 +33,8 @@ CREATE TABLE Patients (
     Patient_name VARCHAR(100) NOT NULL UNIQUE,     /*username*/
     Encrypted_password VARCHAR(255) NOT NULL,
     Email VARBINARY(255) NOT NULL,            /*Email as the contact information*/
-    DOB DATE,
-    Insurance VARCHAR(255),                 /*Null indicates no insurance*/
+    DOB DATE NULL,
+    Insurance VARCHAR(255) NULL,                 /*Null indicates no insurance*/
     Created_at DateTime NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (Patient_id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -66,8 +66,8 @@ CREATE TABLE Orders (
     Order_date DATE NOT NULL,
     Status VARCHAR(100) NOT NULL,
     Patient_id INT NOT NULL,
-    Test_id INT NOT NULL,
-    Staff_id INT NOT NULL,
+    Staff_id INT NULL,
+    Test_id INT NULL,
     PRIMARY KEY (Order_id),
     FOREIGN KEY (Patient_id) REFERENCES Patients(Patient_id),
     FOREIGN KEY (Test_id) REFERENCES Tests(Test_id),
@@ -89,8 +89,8 @@ CREATE TABLE Results (
     Result_id INT NOT NULL UNIQUE AUTO_INCREMENT,
     Report_url VARCHAR(255) NOT NULL,
     Interpretation VARCHAR(255) NOT NULL,
-    Order_id INT NOT NULL,
-    Staff_id INT NOT NULL,
+    Order_id INT NULL,
+    Staff_id INT NULL,
     PRIMARY KEY (Result_id),
     FOREIGN KEY (Order_id) REFERENCES Orders(Order_id),
     FOREIGN KEY (Staff_id) REFERENCES Staff(Staff_id)
@@ -120,14 +120,14 @@ INSERT INTO Staff (Staff_id, Staff_name, Encrypted_password, Email, Position, Cr
 (NULL, "chloe", "$2y$10$/mgQjcVRWaBZa5S11wQ2LOHl8l59jDXQczuO13lni1x47wfYdMly6", AES_ENCRYPT("chloe@gmail.com", "GThKyaCpvHWlh9OW"), "doctor", CURRENT_TIMESTAMP), 
 (NULL, "X", "$2y$10$HV5BPMYKMYQdJmmPSvgGgu49SLoFBch4qV2x0HqNqi.1utOWaw0am", AES_ENCRYPT("X@gmail.com", "GThKyaCpvHWlh9OW"), "doctor", CURRENT_TIMESTAMP), 
 (NULL, "Y", "$2y$10$oRS86M4vyE.Ul1Q4196aEuNgsHIMO6IoPPX7IJ9zgik2CLudjrhuO", AES_ENCRYPT("Y@gmail.com", "GThKyaCpvHWlh9OW"), "doctor", CURRENT_TIMESTAMP), 
-(NULL, "Z", "$2y$10$7qV6wfvr7BYwtJ672yOuuOWlF9TQH64YNJRkp5XVyL4AwqYYM.Voq", AES_ENCRYPT("X@gmail.com", "GThKyaCpvHWlh9OW"), "doctor", CURRENT_TIMESTAMP);
+(NULL, "Z", "$2y$10$7qV6wfvr7BYwtJ672yOuuOWlF9TQH64YNJRkp5XVyL4AwqYYM.Voq", AES_ENCRYPT("Z@gmail.com", "GThKyaCpvHWlh9OW"), "doctor", CURRENT_TIMESTAMP);
 
 -- Create dummy row
 INSERT INTO Tests (Test_id, Test_code, Test_name, Description, Cost) VALUES (NULL, "Test001", "A-Test", "A-Test is just a test", "1000"), 
-(NULL, "test002", "B-Test", "B-Test is just another test", "5000");
+(NULL, "Test002", "B-Test", "B-Test is just another test", "5000");
 
-INSERT INTO Orders (Order_id, Order_date, Status, Patient_id, Test_id, Staff_id) VALUES (NULL, "2023-11-15", "Done", "1", "1", "2"), 
-(NULL, "2023-11-20", "Pending", "1", "2", "2"),
+INSERT INTO Orders (Order_id, Order_date, Status, Patient_id, Test_id, Staff_id) VALUES (NULL, "2023-11-15", "Paid", "1", "1", "2"), 
+(NULL, "2023-11-20", "Test Pending", "1", "2", "2"),
 (NULL, "2023-12-12", "Pending", "2", "1", "4"),
 (NULL, "2023-12-20", "Pending", "2", "2", "4");
 

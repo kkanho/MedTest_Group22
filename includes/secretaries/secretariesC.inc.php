@@ -10,11 +10,20 @@ function isInputEmpty(string $Sampling_type, string $Appointments_datetime, stri
         return false;
     }
 }
-function userFound(object $pdo, string $Patient_name): bool {
 
-    $row = getPatientUserID($pdo, $Patient_name);
-    
-    if ($row) {
+
+//for order
+function isOrderInputEmpty(string $Order_date, string $Status, string $Patient_name, string $Staff_name): bool {
+    if (empty($Order_date) || empty($Status) || empty($Patient_name) || empty($Staff_name)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+//for result
+function isResultInputEmpty(string $Report_url, string $Interpretation, string $Order_id, string $Staff_name): bool {
+    if (empty($Report_url) || empty($Interpretation) || empty($Order_id) || empty($Staff_name)) {
         return true;
     } else {
         return false;
@@ -43,7 +52,26 @@ function orderIDFound(object $pdo, string $Order_id): bool {
 
 
 
+function userFound(object $pdo, string $Patient_name): bool {
 
+    $row = getPatientUserID($pdo, $Patient_name);
+    
+    if ($row) {
+        return true;
+    } else {
+        return false;
+    }
+}
+function staffFound(object $pdo, string $Staff_name): bool {
+
+    $row = getStaffUserID($pdo, $Staff_name);
+    
+    if ($row) {
+        return true;
+    } else {
+        return false;
+    }
+}
 function isRowIndexInt(string $rowIndex): bool {
     if (is_numeric($rowIndex)) {
         return true;

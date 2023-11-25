@@ -2,6 +2,9 @@
 
 ini_set('session.use_only_cookie', 1);
 ini_set('session.use_strict_mode', 1);
+ini_set('log_errors', 1); //enable error logging
+ini_set('error_log', '/tmp/php-error.log');
+error_log('Hello, errors!');
 
 session_set_cookie_params([
     'lifetime' => 1800,

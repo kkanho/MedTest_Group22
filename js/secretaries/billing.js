@@ -27,7 +27,7 @@ $("#billing_data_output_head").hide();
         $('#billingTable tr:last').after(`
             <tr>
                 <td>#</td>
-                <td><input type="text" class="form-control" placeholder="Name" name="Patient_name" id="Patient_name"></td>
+                <td><input type="text" class="form-control" placeholder="Patient Name" name="Patient_name" id="Patient_name"></td>
                 <td><input type="text" class="form-control" placeholder="3000" name="Amount" id="Amount"></td>
                 <td><input type="text" class="form-control" placeholder="Pending" name="Payment_Status" id="Payment_Status"></td>
                 <td><input type="text" class="form-control" placeholder="Accepted" name="Insurance_Status" id="Insurance_Status"></td>

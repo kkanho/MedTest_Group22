@@ -30,8 +30,7 @@ $("#patientsResults_newRow").hide();
                 <td>#</td>
                 <td><input type="text" class="form-control" placeholder="https://github.com/kkanho" name="Report_url" id="Report_url"></td>
                 <td><input type="text" class="form-control" placeholder="some interpretation" name="Interpretation" id="Interpretation"></td>
-                <td><input type="text" class="form-control" placeholder="corresponding order id" name="Order_id" id="Order_id"></td>
-                <td>
+                <td colspan="2">
                     <button class="btn btn-outline-success w-100" id="patientsResults_newRow" type='submit' form="insertPatientResult">Add Result</button>
                 </td>
             </tr>

@@ -107,9 +107,9 @@ if ($postRequest) {
                 die();
             }
 
-            $Patient_id = userFound($pdo, $Patient_name);
+            // $Patient_id = userFound($pdo, $Patient_name);
             
-            insertAppointment($pdo, $Sampling_type, $Appointments_datetime, $Patient_id);
+            insertAppointment($pdo, $Sampling_type, $Appointments_datetime, $Patient_name);
             header("Location: ../../index.php?insertAppointment=success"); //redirect
 
             //close the connection
