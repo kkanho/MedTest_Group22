@@ -44,7 +44,7 @@ function availableTest() {
                         <tr>
                             <th scope="col">Test ID</th>
                             <th scope="col">Sampling Type</th>
-                            <th scope="col">availableTests Datetime</th>
+                            <th scope="col">Tests Datetime</th>
                             <th scope="col">Patient Name</th>
                             <th scope="col">Patient Email</th>
                             <th scope="col"></th>
@@ -78,7 +78,7 @@ function order() {
                                 <th scope="col">Status</th>
                                 <th scope="col">Patient Name</th>
                                 <th scope="col">Staff Name [POS]</th>
-                                <th scope="col">availableTest Id</th>
+                                <th scope="col">Test Id</th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
