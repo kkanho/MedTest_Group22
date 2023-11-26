@@ -1,97 +1,97 @@
 <?php
 
 function patientsSamplingType() {
-    if (isset($_SESSION["role"]) && $_SESSION["role"] === "lab_staff") {
-        echo '
-            <div class="row pt-4">
-                <div class="col-6 col-md-2">
-                    <button class="btn btn-outline-primary mt-4 mb-4" id="samplingType">Patients Sampling Type</button>
-                </div>
-                <div class="col-12 col-md-10 table-responsive">
-                    <table class="table" id="patientsSamplingTable">
-                        <thead id="sampling_type_data_output_head">
+
+    echo '
+        <a id="sampling_section"></a><br><br><br>
+        <div class="row pt-4">
+            <div class="col-12 table-responsive card">
+                <table class="table table-striped table-hover mt-3" id="patientsSamplingTable">
+                    <thead id="sampling_type_data_output_head">
+                        <tr class="col-6 col-md-2">
+                            <th colspan="4" class="w-100 text-bg-warning text-lg-center" id="samplingType">Patients Sampling Type</th>
+                        </tr>
+                        <tr>
+                            <th scope="col">Appointment ID</th>
+                            <th scope="col">Sampling Type</th>
+                            <th scope="col">Datetime</th>
+                            <th scope="col">Patient Name</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider" id="sampling_type_data_output">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <script type="text/javascript" src="./js/labStaff_js/patientsSamplingType.js"></script>
+    ';
+}
+function labTest() {
+
+    echo '
+        <a id="labTest_section"></a><br><br><br>
+        <div class="row pt-4">
+            <div class="col-12 table-responsive card">
+                <form action="includes/labStaff/labTest.inc.php" method="post" id="insertLabTest">
+                    <table class="table table-striped table-hover mt-3" id="labTestTable">
+                        <thead id="lab_test_head">
+                            <tr class="col-6 col-md-2">
+                                <th colspan="6" class="w-100 text-bg-warning text-lg-center" id="labTest">Lab Test</th>
+                            </tr>
                             <tr>
-                                <th scope="col">Appointment ID</th>
-                                <th scope="col">Sampling Type</th>
-                                <th scope="col">Datetime</th>
-                                <th scope="col">Patient Name</th>
+                                <th scope="col">Test ID</th>
+                                <th scope="col">Test Code</th>
+                                <th scope="col">Test Name</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Cost</th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
-                        <tbody class="table-group-divider" id="sampling_type_data_output">
+                        <tbody class="table-group-divider" id="lab_test">
+
+                        </tbody>
+
+                    </table>
+                </form>
+            </div>
+
+        </div>
+        <div class="row pt-4">
+            
+        </div>
+        <script type="text/javascript" src="./js/labStaff_js/labTest.js"></script>
+    ';
+}
+function patientsResults() {
+
+    echo '
+        <a id="patientsResult_section"></a><br><br><br>
+        <div class="row pt-4">
+            <div class="col-12 table-responsive card">
+                <form action="includes/labStaff/patientsResults.inc.php" method="post" id="insertPatientResult">
+                    <table class="table table-striped table-hover mt-3" id="patientsResultsTable">
+                        <thead id="patients_results_head">
+                            <tr class="col-6 col-md-2">
+                                <th colspan="6" class="w-100 text-bg-warning text-lg-center" id="patientsResults">Patients Result</th>
+                            </tr>
+                            <tr>
+                                <th scope="col">Result ID</th>
+                                <th scope="col">Report URL</th>
+                                <th scope="col">Interpretation</th>
+                                <th scope="col">Order ID</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider" id="patients_results">
 
                         </tbody>
                     </table>
-                </div>
+                </form>
             </div>
-            <script type="text/javascript" src="./js/labStaff_js/patientsSamplingType.js"></script>
-        ';
-    }
-}
-function labTest() {
-    if (isset($_SESSION["role"]) && $_SESSION["role"] === "lab_staff") {
-        echo '
-            <div class="row pt-4">
-                <div class="col-6 col-md-2">
-                    <button class="btn btn-outline-primary mt-4 mb-4" id="labTest">Lab Test</button>
-                </div>
-                <div class="col-12 col-md-10 table-responsive">
-                    <form action="includes/labStaff/labTest.inc.php" method="post" id="insertLabTest">
-                        <table class="table" id="labTestTable">
-                            <thead id="lab_test_head">
-                                <tr>
-                                    <th scope="col">Test ID</th>
-                                    <th scope="col">Test Code</th>
-                                    <th scope="col">Test Name</th>
-                                    <th scope="col">Description</th>
-                                    <th scope="col">Cost</th>
-                                    <th scope="col"></th>
-                                </tr>
-                            </thead>
-                            <tbody class="table-group-divider" id="lab_test">
-
-                            </tbody>
-
-                        </table>
-                    </form>
-                </div>
-
-            </div>
-            <div class="row pt-4">
-                
-            </div>
-            <script type="text/javascript" src="./js/labStaff_js/labTest.js"></script>
-        ';
-    }
-}
-function patientsResults() {
-    if (isset($_SESSION["role"]) && $_SESSION["role"] === "lab_staff") {
-        echo '
-            <div class="row pt-4">
-                <div class="col-6 col-md-2">
-                    <button class="btn btn-outline-primary mt-4 mb-4" id="patientsResults">Patients Result</button>
-                </div>
-                <div class="col-12 col-md-10 table-responsive">
-                    <form action="includes/labStaff/patientsResults.inc.php" method="post" id="insertPatientResult">
-                        <table class="table" id="patientsResultsTable">
-                            <thead id="patients_results_head">
-                                <tr>
-                                    <th scope="col">Result ID</th>
-                                    <th scope="col">Report URL</th>
-                                    <th scope="col">Interpretation</th>
-                                    <th scope="col">Order ID</th>
-                                    <th scope="col"></th>
-                                </tr>
-                            </thead>
-                            <tbody class="table-group-divider" id="patients_results">
-
-                            </tbody>
-                        </table>
-                    </form>
-                </div>
-            </div>
-            <script type="text/javascript" src="./js/labStaff_js/patientsResult.js"></script>
-        ';
-    }
+        </div>
+        <script type="text/javascript" src="./js/labStaff_js/patientsResult.js"></script>
+    ';
 }
 
 

@@ -150,13 +150,16 @@ INSERT INTO Appointments (`Appointment_id`, `Sampling_type`, `Appointments_datet
 (NULL, 'Sampling Type A', '2023-11-08 11:30', '4'),
 (NULL, 'Sampling Type B', '2023-11-16 11:30', '4');
 
+
+-- the following will not work since admin don't have the privilege to grant privileges for other users
+-- However, admin is able to perform create
 -- Lab_staff Role 
 CREATE ROLE Lab_staff;
 GRANT SELECT, INSERT, UPDATE, DELETE ON Tests TO Lab_staff;
 GRANT SELECT, INSERT, UPDATE, DELETE ON Appointments TO Lab_staff;
 GRANT SELECT, INSERT, UPDATE, DELETE ON Results TO Lab_staff;
 CREATE USER 'theo' IDENTIFIED BY 'theo';
-GRANT Lab_staff TO theo;
+GRANT Lab_staff TO 'theo';
 
 -- Secretaries Role
 CREATE ROLE Secretaries;
@@ -164,7 +167,7 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON Appointments TO Secretaries;
 GRANT SELECT, INSERT, UPDATE, DELETE ON Billing TO Secretaries;
 GRANT SELECT, INSERT, UPDATE, DELETE ON Results TO Secretaries;
 CREATE USER 'kan' IDENTIFIED BY 'kan';
-GRANT Secretaries TO kan;
+GRANT Secretaries TO 'kan';
 
 -- Patients Role
 CREATE ROLE Patients;
