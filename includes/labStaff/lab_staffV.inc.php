@@ -9,12 +9,12 @@ function patientsSamplingType() {
                 <table class="table table-striped table-hover mt-3" id="patientsSamplingTable">
                     <thead id="sampling_type_data_output_head">
                         <tr class="col-6 col-md-2">
-                            <th colspan="4" class="w-100 text-bg-warning text-lg-center" id="samplingType">Patients Sampling Type</th>
+                            <th colspan="4" class="w-100 text-bg-warning text-lg-center" id="samplingType">Orders</th>
                         </tr>
                         <tr>
-                            <th scope="col">Appointment ID</th>
-                            <th scope="col">Sampling Type</th>
-                            <th scope="col">Datetime</th>
+                            <th scope="col">Order ID</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Date</th>
                             <th scope="col">Patient Name</th>
                         </tr>
                     </thead>

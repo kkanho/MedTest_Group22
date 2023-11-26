@@ -124,7 +124,10 @@ INSERT INTO Staff (Staff_id, Staff_name, Encrypted_password, Email, Position, Cr
 
 -- Create dummy row
 INSERT INTO Tests (Test_id, Test_code, Test_name, Description, Cost) VALUES (NULL, "Test001", "A-Test", "A-Test is just a test", "1000"), 
-(NULL, "Test002", "B-Test", "B-Test is just another test", "5000");
+(NULL, "Test002", "B-Test", "B-Test is just another test", "5000"),
+(NULL, "Test003", "B-Test", "B-Test is just another test", "5000"),
+(NULL, "Test004", "B-Test", "B-Test is just another test", "5000"),
+(NULL, "Test005", "B-Test", "B-Test is just another test", "5000");
 
 INSERT INTO Orders (Order_id, Order_date, Status, Patient_id, Test_id, Staff_id) VALUES (NULL, "2023-11-15", "Paid", "1", "1", "2"), 
 (NULL, "2023-11-20", "Test Pending", "1", "2", "2"),
@@ -141,14 +144,14 @@ INSERT INTO Billing (Billing_id, Amount, Payment_Status, Insurance_Status, Order
 (NULL, "2000", "Pending", "Accepted", "3"),
 (NULL, "1500", "Pending", "Accepted", "4");
 
-INSERT INTO Appointments (`Appointment_id`, `Sampling_type`, `Appointments_datetime`, `Patient_id`) VALUES (NULL, 'Sampling Type A', '2023-11-08 08:30', '1'), 
-(NULL, 'Sampling Type B', '2023-11-16 08:30', '1'),
-(NULL, 'Sampling Type A', '2023-11-08 09:30', '2'),
-(NULL, 'Sampling Type B', '2023-11-16 09:30', '2'),
-(NULL, 'Sampling Type A', '2023-11-08 10:30', '3'),
-(NULL, 'Sampling Type B', '2023-11-16 10:30', '3'),
-(NULL, 'Sampling Type A', '2023-11-08 11:30', '4'),
-(NULL, 'Sampling Type B', '2023-11-16 11:30', '4');
+INSERT INTO Appointments (`Appointment_id`, `Sampling_type`, `Appointments_datetime`, `Patient_id`) VALUES (NULL, 'Blood', '2023-11-08 08:30', '1'), 
+(NULL, 'X-ray A', '2023-11-16 08:30', '1'),
+(NULL, 'Blood', '2023-11-08 09:30', '2'),
+(NULL, 'X-ray B', '2023-11-16 09:30', '2'),
+(NULL, 'Blood', '2023-11-08 10:30', '3'),
+(NULL, 'X-ray A', '2023-11-16 10:30', '3'),
+(NULL, 'Blood', '2023-11-08 11:30', '4'),
+(NULL, 'X-ray B', '2023-11-16 11:30', '4');
 
 
 -- the following will not work since admin don't have the privilege to grant privileges for other users

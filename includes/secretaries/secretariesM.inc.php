@@ -25,6 +25,21 @@ function getAppointment(object $pdo): array {
 
     return $result;
 }
+function getAvailableTest(object $pdo) {
+
+    $query = "SELECT Test_id, Test_code, Test_name, Description, Cost FROM Tests";
+
+    //prevent SQL injection
+    $stmt = $pdo->prepare($query);
+
+    $stmt->execute();
+
+    $result = [];
+
+    // $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $result = $stmt->fetchAll();
+    return $result;
+}
 function getOrder(object $pdo) {
 
     // $aeskey = "GThKyaCpvHWlh9OW";
@@ -257,6 +272,20 @@ function getOrderID(object $pdo, $Order_id) {
     $stmt = $pdo->prepare($query);
 
     $stmt->bindParam(":Order_id", $Order_id);
+    $stmt->execute();
+
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);//get the first result
+    return $result;
+
+}
+function getTestID(object $pdo, $Test_id) {
+
+    $query = "SELECT Test_id FROM Tests WHERE Test_id = :Test_id;";
+
+    //prevent SQL injection
+    $stmt = $pdo->prepare($query);
+
+    $stmt->bindParam(":Test_id", $Test_id);
     $stmt->execute();
 
     $result = $stmt->fetch(PDO::FETCH_ASSOC);//get the first result

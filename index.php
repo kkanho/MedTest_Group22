@@ -132,6 +132,7 @@
                 } else if ($isSecretaries) {
                     //For Secretaries
                     patientsAppointment();
+                    availableTest();
                     order();
                     sec_PatientsResults();
                     patientsBilling();

@@ -40,6 +40,9 @@
                         <a class="nav-link active" aria-current="page" href="#appointment_section">Appointment</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#order_section">Test</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#order_section">Order</a>
                     </li>
                     <li class="nav-item">

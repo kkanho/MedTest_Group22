@@ -25,7 +25,7 @@ function getUserTestOrder(object $pdo, string $username): array {
 
     $query = "SELECT Orders.Order_id, Orders.Order_date, Orders.Status
     FROM Orders 
-    JOIN Results
+    LEFT OUTER JOIN Results
     ON Orders.Order_id = Results.Order_id
     WHERE Patient_id = (SELECT Patient_id FROM Patients WHERE Patient_name = :username);";
     

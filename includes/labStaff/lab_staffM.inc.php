@@ -4,10 +4,17 @@ declare(strict_types=1);
 
 function getPatientsSamplingType(object $pdo): array {
 
-    $query = "SELECT Appointments.Appointment_id, Appointments.Sampling_type, Appointments.Appointments_datetime, Appointments.Patient_id, Patients.Patient_name
-    FROM Appointments
-    JOIN Patients
-    ON Appointments.Patient_id = Patients.Patient_id";
+    
+
+    // $query = "SELECT Appointments.Appointment_id, Appointments.Sampling_type, Appointments.Appointments_datetime, Appointments.Patient_id, Patients.Patient_name
+    // FROM Appointments
+    // LEFT OUTER JOIN Patients
+    // ON Appointments.Patient_id = Patients.Patient_id";
+
+    $query = "SELECT Orders.Order_id, Orders.Status, Orders.Order_date, Patients.Patient_name
+    FROM Orders
+    LEFT OUTER JOIN Patients
+    ON Orders.Patient_id = Patients.Patient_id;";
 
     //prevent SQL injection
     $stmt = $pdo->prepare($query);

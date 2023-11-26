@@ -48,8 +48,16 @@ function orderIDFound(object $pdo, string $Order_id): bool {
         return false;
     }
 }
+function testIDFound(object $pdo, string $Test_id): bool {
 
-
+    $row = getTestID($pdo, $Test_id);
+    
+    if ($row) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 
 function userFound(object $pdo, string $Patient_name): bool {

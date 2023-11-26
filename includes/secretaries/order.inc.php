@@ -110,6 +110,9 @@ if ($postRequest) {
                 } else {
                     $Test_id = intval($Test_id);
                 }
+                if (!testIDFound($pdo, $Test_id)) {
+                    $ERRORS["test_notFound"] = 'Test not found!';
+                }
             } 
             if($Test_id === '') {
                 $Test_id = null;

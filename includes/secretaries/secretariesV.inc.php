@@ -1,7 +1,6 @@
 <?php
 
 function patientsAppointment() {
-
     echo '
         <a id="appointment_section"></a><br><br><br>
         <div class="row pt-4">
@@ -31,36 +30,34 @@ function patientsAppointment() {
         <script type="text/javascript" src="./js/secretaries/appointment.js"></script>
     ';
 }
-function patientsBilling() {
-    
+function availableTest() {
     echo '
-        <a id="billing_section"></a><br><br><br>
+        <a id="test_section"></a><br><br><br>
         <div class="row pt-4">
             <div class="col-12 table-responsive card">
-                <form action="includes/secretaries/billing.inc.php" method="post" id="insertBilling">
-                    <table class="table table-striped table-hover mt-3" id="billingTable">
-                        <thead id="billing_data_output_head">
-                        <tr class="col-6 col-md-2" id="billing">
-                            <th colspan="7" class="w-100 text-bg-primary text-lg-center">Billing</th>
-                        </tr>
-                            <tr>
-                                <th scope="col">Billing ID</th>
-                                <th scope="col">Patient Name</th>
-                                <th scope="col">Amount</th>
-                                <th scope="col">Payment Status</th>
-                                <th scope="col">Insurance Status</th>
-                                <th scope="col">Order ID</th>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
-                        <tbody class="table-group-divider" id="billing_data_output">
 
-                        </tbody>
-                    </table>
-                </form>
+                <table class="table table-striped table-hover mt-3" id="availableTestTable">
+                    <thead id="availableTest_data_output_head">
+                        <tr class="col-6 col-md-2" id="availableTest">
+                            <th colspan="6" class="w-100 text-bg-primary text-lg-center">Test Available</th>
+                        </tr>
+                        <tr>
+                            <th scope="col">Test ID</th>
+                            <th scope="col">Sampling Type</th>
+                            <th scope="col">availableTests Datetime</th>
+                            <th scope="col">Patient Name</th>
+                            <th scope="col">Patient Email</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider" id="availableTest_data_output">
+
+                    </tbody>
+                </table>
+
             </div>
         </div>
-        <script type="text/javascript" src="./js/secretaries/billing.js"></script>
+        <script type="text/javascript" src="./js/secretaries/availableTest.js"></script>
     ';
 }
 function order() {
@@ -81,7 +78,7 @@ function order() {
                                 <th scope="col">Status</th>
                                 <th scope="col">Patient Name</th>
                                 <th scope="col">Staff Name [POS]</th>
-                                <th scope="col">Test Id</th>
+                                <th scope="col">availableTest Id</th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
@@ -125,6 +122,38 @@ function sec_PatientsResults() {
             </div>
         </div>
         <script type="text/javascript" src="./js/secretaries/sec_patientsResults.js"></script>
+    ';
+}
+function patientsBilling() {
+    
+    echo '
+        <a id="billing_section"></a><br><br><br>
+        <div class="row pt-4">
+            <div class="col-12 table-responsive card">
+                <form action="includes/secretaries/billing.inc.php" method="post" id="insertBilling">
+                    <table class="table table-striped table-hover mt-3" id="billingTable">
+                        <thead id="billing_data_output_head">
+                        <tr class="col-6 col-md-2" id="billing">
+                            <th colspan="7" class="w-100 text-bg-primary text-lg-center">Billing</th>
+                        </tr>
+                            <tr>
+                                <th scope="col">Billing ID</th>
+                                <th scope="col">Patient Name</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Payment Status</th>
+                                <th scope="col">Insurance Status</th>
+                                <th scope="col">Order ID</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider" id="billing_data_output">
+
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+        <script type="text/javascript" src="./js/secretaries/billing.js"></script>
     ';
 }
 
