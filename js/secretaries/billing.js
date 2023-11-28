@@ -19,7 +19,7 @@ $("#billing_data_output_head").hide();
                 <td>${checkEmptyBlock(row.Insurance_Status)}</td>
                 <td>${checkEmptyBlock(row.Order_id)}</td>
                 <td>
-                    <button class="btn btn-outline-danger" id="${row.Billing_id}" type="button" onclick="deleteBillingRow(this)">Delete</button>
+                    <button class="btn btn-outline-danger w-100" id="${row.Billing_id}" type="button" onclick="deleteBillingRow(this)">Delete</button>
                 </td>
             </tr>`;
         }
@@ -27,13 +27,13 @@ $("#billing_data_output_head").hide();
         $('#billingTable tr:last').after(`
             <tr>
                 <td>#</td>
-                <td><input type="text" class="form-control" placeholder="Patient Name" name="Patient_name" id="Patient_name"></td>
-                <td><input type="text" class="form-control" placeholder="3000" name="Amount" id="Amount"></td>
-                <td><input type="text" class="form-control" placeholder="Pending" name="Payment_Status" id="Payment_Status"></td>
-                <td><input type="text" class="form-control" placeholder="Accepted" name="Insurance_Status" id="Insurance_Status"></td>
-                <td><input type="text" class="form-control" placeholder="" name="Order_id" id="Order_id"></td>
+                <td><input type="text" class="form-control shadow-sm" placeholder="Patient Name" name="Patient_name" id="Patient_name"></td>
+                <td><input type="text" class="form-control shadow-sm" placeholder="3000" name="Amount" id="Amount"></td>
+                <td><input type="text" class="form-control shadow-sm" placeholder="Pending" name="Payment_Status" id="Payment_Status"></td>
+                <td><input type="text" class="form-control shadow-sm" placeholder="Accepted" name="Insurance_Status" id="Insurance_Status"></td>
+                <td><input type="text" class="form-control shadow-sm" placeholder="" name="Order_id" id="Order_id"></td>
                 <td>
-                    <button class="btn btn-outline-success w-100" id="billing_newRow" type='submit' form="insertBilling">Add Billing</button>
+                    <button class="btn btn-outline-success w-100" id="billing_newRow" type='submit' form="insertBilling">Add</button>
                 </td>
             </tr>
         `)

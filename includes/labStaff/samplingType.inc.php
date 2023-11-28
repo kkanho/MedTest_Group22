@@ -21,7 +21,9 @@ if ($getRequest) {
         require_once 'lab_staffM.inc.php';
         require_once 'lab_staffV.inc.php';
 
-        $result = getPatientsSamplingType($pdo);
+        $Staff_id = $_SESSION["user_id"];
+
+        $result = getPatientsSamplingType($pdo, $Staff_id);
 
         echo json_encode($result);//echo the data allow fetching using JS
 

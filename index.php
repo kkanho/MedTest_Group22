@@ -36,6 +36,8 @@
         (isset($_GET["deleteOrder"])  && $_GET["deleteOrder"] === "success") ||
         (isset($_GET["deleteResult"])  && $_GET["deleteResult"] === "success") ||
         (isset($_GET["deleteBilling"])  && $_GET["deleteBilling"] === "success");
+    $isUpdateError = isset($_SESSION["errors_updateOrder"]);
+    $isUpdateSuccess = isset($_GET["updateOrder"])  && $_GET["updateOrder"] === "success";
 ?>
 
 <!DOCTYPE html>
@@ -50,10 +52,8 @@
     <title>Group_22</title>
 </head>
 <body>
-
-    <?php require_once 'includes/navbar.php'?>
-
-    <div class="container <?php if(!$isLogin) { ?>center-screen <?php } ?>">
+    
+    <div class="<?php if(!$isLogin) { ?>container center-screen <?php } ?>">
         <script>
             var session = <?php echo json_encode($_SESSION) ?>;
             console.log(session); //delete this line before submit
@@ -62,14 +62,14 @@
         <?php if(!$isLogin) { ?>
 
             <!-- Signup Form -->
-            <div class="container col-sm-10 col-md-7 col-lg-4 mt-4 mb-4" id="signupForm">
-                <div class="card">
+            <div class="container col-sm-10 col-md-6 col-xl-4 mt-4 mb-4" id="signupForm">
+                <div class="card shadow">
                     <div class="card-body p-5">            
                         <form action="includes/signup/signup.inc.php" method="post">
                             <h1 class="row mb-4 justify-content-center">Signup</h1>
                             <?php signupInput(); ?>
                             <?php //checkSignupErrors(); ?>
-                            <button class="btn btn-outline-primary w-100" id="signupBtn">Signup</button>
+                            <button class="btn btn-outline-primary w-100 mb-2" id="signupBtn">Signup</button>
                         </form>
                         <span>
                             Already have an account?
@@ -81,17 +81,17 @@
 
 
             <!-- Login Form -->
-            <div class="container col-sm-10 col-md-7 col-lg-4 mt-4 mb-4" id="loginForm">
-                <div class="card">
+            <div class="container col-sm-10 col-md-6 col-xl-4 mt-4 mb-4" id="loginForm">
+                <div class="card shadow">
                     <div class="card-body p-5">            
                         <form action="includes/login/login.inc.php" method="post">
                             <h1 class="row mb-4 justify-content-center">Login</h1>
                             <div class="form-floating mb-2">
-                                <input class="form-control" id="username" name="username" placeholder="Username">
+                                <input class="form-control shadow-sm" id="username" name="username" placeholder="Username">
                                 <label for="username" class="form-label">Username</label>
                             </div>
                             <div class="form-floating mb-2">
-                                <input class="form-control" id="password" name="password" placeholder="Password">
+                                <input class="form-control shadow-sm" id="password" name="password" placeholder="Password">
                                 <label for="password" class="form-label">Password</label>
                             </div>
                             <div class="pb-2" >
@@ -116,31 +116,43 @@
         <?php } else { //user Logged In ?>
             <!-- show required data depends on user_role-->
             <!-- Print there personal info -->
+            <?php require_once 'includes/navbar.php'?>
 
-            <?php 
-                if ($isPatient) {
-                    //For patient
-                    patientPersonalInfo();
-                    patientTestOrder();
-                    patientTestResult();
-                    patientBill();
-                } else if ($isLabStaff) {
-                    //For Lab staff
-                    patientsSamplingType();
-                    labTest();
-                    patientsResults();
-                } else if ($isSecretaries) {
-                    //For Secretaries
-                    patientsAppointment();
-                    availableTest();
-                    order();
-                    sec_PatientsResults();
-                    patientsBilling();
-                } else {
-                    echo "You don't have permission to access resources! Please contact your administrator.";
-                }
-            ?>
-            
+                <div class="row">
+
+                <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+                <div class="col-10 py-3 position-absolute end-0 px-2 py-sm-5 px-sm-5">
+
+                    <?php 
+                        if ($isPatient) {
+                            //For patient
+                            patientPersonalInfo();
+                            patientTestOrder();
+                            patientTestResult();
+                            patientBill();
+                        } else if ($isLabStaff) {
+                            //For Lab staff
+                            labTest();
+                            patientsSamplingType();
+                            patientsResults();
+                        } else if ($isSecretaries) {
+                            //For Secretaries
+                            patientsAppointment();
+                            availableTest();
+                            order();
+                            sec_PatientsResults();
+                            patientsBilling();
+                        } else {
+                            echo "You don't have permission to access resources! Please contact your administrator.";
+                        }
+                    ?>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         <?php } ?>
 
         <!-- Toast -->
@@ -169,6 +181,12 @@
                         <div class="form-error text-success mb-2" id="toast_header_text">Delete Success!</div>
                     <?php }?>
 
+                    <?php if($isUpdateError) {?>
+                        <div class="form-error text-danger mb-2" id="toast_header_text">Alert!</div>
+                    <?php } else if ($isUpdateSuccess) { ?>
+                        <div class="form-error text-success mb-2" id="toast_header_text">Update Success!</div>
+                    <?php }?>
+
                 </strong>
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
@@ -188,6 +206,7 @@
                 <?php checkDeleteResultErrors(); ?>
                 <?php checkInsertOrderErrors(); ?>
                 <?php checkDeleteOrderErrors(); ?>
+                <?php checkUpdateOrderErrors(); ?>
             </div>
         </div>
         <script>
@@ -233,6 +252,8 @@
                     session.hasOwnProperty('errors_insertOrder') ||
                     urlParams.get("deleteOrder") === "success" ||
                     session.hasOwnProperty('errors_deleteOrder') ||
+                    urlParams.get("updateOrder") === "success" ||
+                    session.hasOwnProperty('errors_updateOrder') ||
 
                     urlParams.get("insertBilling") === "success" ||
                     session.hasOwnProperty('errors_insertBilling') ||

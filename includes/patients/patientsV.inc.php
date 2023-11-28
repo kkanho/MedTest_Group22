@@ -3,9 +3,10 @@
 function patientPersonalInfo() {
     
     echo '
-        <a id="patientData_section"></a><br><br><br>
+        <div>
+        <a id="patientData_section"></a>
         <div class="row pt-4">
-            <div class="col-12 table-responsive card">
+            <div class="col-12 table-responsive card shadow">
                 <table class="table table-striped table-hover mt-3">
                     <thead id="patient_info_data_output_head">
                         <tr class="col-6 col-md-2">
@@ -26,6 +27,7 @@ function patientPersonalInfo() {
                 </table>
             </div>
         </div>
+        </div>
         <script type="text/javascript" src="./js/patient_js/patientPersonalInfo.js"></script>
     ';
     
@@ -33,16 +35,17 @@ function patientPersonalInfo() {
 function patientTestOrder() {
     
     echo '
-        <a id="testOrder_section"></a><br><br><br>
+        <a id="testOrder_section"></a><br><br>
         <div class="row pt-4">
-            <div class="col-12 table-responsive card">
+            <div class="col-12 table-responsive card shadow">
                 <table class="table table-striped table-hover mt-3">
                     <thead id="patient_test_order_data_output_head">
                         <tr class="col-6 col-md-2">
-                            <th colspan="3" class="w-100 text-bg-info text-lg-center" id="patientTestOrder">Test Order</th>
+                            <th colspan="4" class="w-100 text-bg-info text-lg-center" id="patientTestOrder">Test Order</th>
                         </tr>
                         <tr>
                             <th scope="col">Order ID</th>
+                            <th scope="col">Test name</th>
                             <th scope="col">Order Date</th>
                             <th scope="col">Status</th>
                         </tr>
@@ -60,9 +63,9 @@ function patientTestOrder() {
 function patientTestResult() {
     
     echo '
-        <a id="testResult_section"></a><br><br><br>
+        <a id="testResult_section"></a><br><br>
         <div class="row pt-4">
-            <div class="col-12 table-responsive card">
+            <div class="col-12 table-responsive card shadow">
                 <table class="table table-striped table-hover mt-3">
                 <thead id="patient_test_result_data_output_head">
                     <tr class="col-6 col-md-2">
@@ -88,16 +91,16 @@ function patientTestResult() {
 function patientBill() {
     
     echo '
-        <a id="bill_section"></a><br><br><br>
+        <a id="bill_section"></a><br><br>
         <div class="row pt-4">
-            <div class="col-12 table-responsive card">
+            <div class="col-12 table-responsive card shadow">
                 <table class="table table-striped table-hover mt-3">
                     <thead id="bill_data_output_head">
                         <tr class="col-6 col-md-2">
-                            <th colspan="4" class="w-100 text-bg-info text-lg-center" id="patientBill">Patient Bill</th>
+                            <th colspan="4" class="w-100 text-bg-info text-lg-center" id="patientBill">Patient Billing</th>
                         </tr>
                         <tr>
-                            <th scope="col">Billing Id</th>
+                            <th scope="col">Billing ID</th>
                             <th scope="col">Amount</th>
                             <th scope="col">Payment Status</th>
                             <th scope="col">Insurance Status</th>

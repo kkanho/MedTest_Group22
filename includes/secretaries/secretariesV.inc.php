@@ -2,9 +2,9 @@
 
 function patientsAppointment() {
     echo '
-        <a id="appointment_section"></a><br><br><br>
+        <a id="appointment_section"></a><br><br>
         <div class="row pt-4">
-            <div class="col-12 table-responsive card">
+            <div class="col-12 table-responsive card shadow">
             <form action="includes/secretaries/appointment.inc.php" method="post" id="insertAppointment">
                 <table class="table table-striped table-hover mt-3" id="appointmentTable">
                     <thead id="appointment_data_output_head">
@@ -32,9 +32,9 @@ function patientsAppointment() {
 }
 function availableTest() {
     echo '
-        <a id="test_section"></a><br><br><br>
+        <a id="test_section"></a><br><br>
         <div class="row pt-4">
-            <div class="col-12 table-responsive card">
+            <div class="col-12 table-responsive card shadow">
 
                 <table class="table table-striped table-hover mt-3" id="availableTestTable">
                     <thead id="availableTest_data_output_head">
@@ -43,10 +43,10 @@ function availableTest() {
                         </tr>
                         <tr>
                             <th scope="col">Test ID</th>
-                            <th scope="col">Sampling Type</th>
-                            <th scope="col">Tests Datetime</th>
-                            <th scope="col">Patient Name</th>
-                            <th scope="col">Patient Email</th>
+                            <th scope="col">Test Code</th>
+                            <th scope="col">Tests name</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Cost</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
@@ -63,14 +63,14 @@ function availableTest() {
 function order() {
     
     echo '
-        <a id="order_section"></a><br><br><br>
+        <a id="order_section"></a><br><br>
         <div class="row pt-4">
-            <div class="col-12 table-responsive card">
+            <div class="col-12 table-responsive card shadow">
                 <form action="includes/secretaries/order.inc.php" method="post" id="insertOrder">
                     <table class="table table-striped table-hover mt-3" id="orderTable">
                         <thead id="order_data_output_head">
                             <tr class="col-6 col-md-2" id="order">
-                                <th colspan="7" class="w-100 text-bg-primary text-lg-center">Order</th>
+                                <th colspan="8" class="w-100 text-bg-primary text-lg-center">Order</th>
                             </tr>
                             <tr>
                                 <th scope="col">Order ID</th>
@@ -79,6 +79,7 @@ function order() {
                                 <th scope="col">Patient Name</th>
                                 <th scope="col">Staff Name [POS]</th>
                                 <th scope="col">Test Id</th>
+                                <th scope="col"></th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
@@ -95,9 +96,9 @@ function order() {
 function sec_PatientsResults() {
     
     echo '
-        <a id="patientsResult_section"></a><br><br><br>
+        <a id="patientsResult_section"></a><br><br>
         <div class="row pt-4">
-            <div class="col-12 table-responsive card">
+            <div class="col-12 table-responsive card shadow">
                 <form action="includes/secretaries/sec_patientsResults.inc.php" method="post" id="insertResult">
                     <table class="table table-striped table-hover mt-3" id="resultTable">
                         <thead id="sec_patients_results_head">
@@ -127,9 +128,9 @@ function sec_PatientsResults() {
 function patientsBilling() {
     
     echo '
-        <a id="billing_section"></a><br><br><br>
+        <a id="billing_section"></a><br><br>
         <div class="row pt-4">
-            <div class="col-12 table-responsive card">
+            <div class="col-12 table-responsive card shadow">
                 <form action="includes/secretaries/billing.inc.php" method="post" id="insertBilling">
                     <table class="table table-striped table-hover mt-3" id="billingTable">
                         <thead id="billing_data_output_head">
@@ -208,6 +209,19 @@ function checkDeleteOrderErrors() {
         unset($_SESSION["errors_deleteOrder"]);
     } else if(isset($_GET["deleteOrder"])  && $_GET["deleteOrder"] === "success") {
         echo '<div class="form-error text-success mb-2">Delete patient result successful!</div>';
+    }
+}
+function checkUpdateOrderErrors() {
+    if (isset($_SESSION["errors_updateOrder"])) {
+        $errors = $_SESSION["errors_updateOrder"];
+
+        foreach ($errors as $error) {
+            echo '<div class="form-error text-danger mb-2">'. $error . '</div>';
+        }
+
+        unset($_SESSION["errors_updateOrder"]);
+    } else if(isset($_GET["updateOrder"])  && $_GET["updateOrder"] === "success") {
+        echo '<div class="form-error text-success mb-2">Update patient result successful!</div>';
     }
 }
 

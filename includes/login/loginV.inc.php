@@ -25,7 +25,7 @@ function ErrorsInLogin(): bool {
 
 function promptUsername() {
     if(isset($_SESSION["user_id"])) {
-        echo '<div class="me-2">You are now logged in as ' . $_SESSION["user_username"] . '[' . $_SESSION["role"] . ']' . '</div>';
+        echo '<div class="me-2">' . $_SESSION["user_username"] . '[' . $_SESSION["role"] . ']' . '</div>';
     } else {
         echo '<div class="me-2">Please login!</div>';
     }

@@ -20,7 +20,7 @@ $("#patientsResults_newRow").hide();
                 <td>${checkEmptyBlock(row.Interpretation)}</td>
                 <td>${checkEmptyBlock(row.Order_id)}</td>
                 <td>
-                <button class="btn btn-outline-danger" id="${row.Result_id}" type='button' onclick="deletePatientResultRow(this)">Delete</button>
+                <button class="btn btn-outline-danger w-100" id="${row.Result_id}" type='button' onclick="deletePatientResultRow(this)">Delete</button>
                 </td>
             </tr>`;
         }
@@ -28,10 +28,11 @@ $("#patientsResults_newRow").hide();
         $('#patientsResultsTable tr:last').after(`
             <tr>
                 <td>#</td>
-                <td><input type="text" class="form-control" placeholder="https://github.com/kkanho" name="Report_url" id="Report_url"></td>
-                <td><input type="text" class="form-control" placeholder="some interpretation" name="Interpretation" id="Interpretation"></td>
-                <td colspan="2">
-                    <button class="btn btn-outline-success w-100" id="patientsResults_newRow" type='submit' form="insertPatientResult">Add Result</button>
+                <td><input type="text" class="form-control shadow-sm" placeholder="https://github.com/kkanho" name="Report_url" id="Report_url"></td>
+                <td><input type="text" class="form-control shadow-sm" placeholder="some interpretation" name="Interpretation" id="Interpretation"></td>
+                <td><input type="text" class="form-control shadow-sm" placeholder="" name="Order_id" id="Order_id"></td>
+                <td>
+                    <button class="btn btn-outline-success w-100" id="patientsResults_newRow" type='submit' form="insertPatientResult">Add</button>
                 </td>
             </tr>
         `)

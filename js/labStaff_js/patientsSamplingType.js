@@ -13,6 +13,7 @@ $("#sampling_type_data_output_head").hide();
         for(let row of data){
             out += `<tr id="${row.Order_id}">
                 <th scope="row">${row.Order_id}</th>
+                <td>${checkEmptyBlock(row.Test_name)}</td>
                 <td>${checkEmptyBlock(row.Status)}</td>
                 <td>${checkEmptyBlock(row.Order_date)}</td>
                 <td>${checkEmptyBlock(row.Patient_name)}</td>

@@ -15,6 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 
             //Since user have already logged in, we can assess their username by session
             $username = $_SESSION["user_username"];
+            
 
             $result = getUserTestResult($pdo, $username);
 

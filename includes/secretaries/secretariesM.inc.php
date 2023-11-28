@@ -44,17 +44,11 @@ function getOrder(object $pdo) {
 
     // $aeskey = "GThKyaCpvHWlh9OW";
 
-    // $query = "SELECT Orders.Order_id, Orders.Order_date, Orders.Status, Patients.Patient_name, AES_DECRYPT(Patients.Email, :aeskey) AS Patient_Email, Staff.Staff_name, AES_DECRYPT(Patients.Email, :aeskey) AS Staff_Email, Orders.Test_id 
-    // FROM Orders
-    // JOIN Patients
-    // ON Orders.Patient_id = Patients.Patient_id
-    // JOIN Staff
-    // ON Orders.Staff_id = Staff.Staff_id;";
     $query = "SELECT Orders.Order_id, Orders.Order_date, Orders.Status, Patients.Patient_name, Staff.Staff_name, Staff.Position, Orders.Test_id 
     FROM Orders
     JOIN Patients
     ON Orders.Patient_id = Patients.Patient_id
-    JOIN Staff
+    LEFT OUTER JOIN Staff
     ON Orders.Staff_id = Staff.Staff_id;";
 
     //prevent SQL injection
@@ -90,10 +84,12 @@ function getSec_PatientsResults(object $pdo): array {
 
     $aesKey = "GThKyaCpvHWlh9OW"; //128bit aes key
     
-    $query = "SELECT Results.Result_id, Results.Report_url, Results.Interpretation, Results.Order_id, Staff.Staff_name, Staff.Position, AES_DECRYPT(Staff.Email, :aeskey) as Email
+    $query = "SELECT Results.Result_id, Results.Report_url, Results.Interpretation, Results.Order_id, Orders.Status, Staff.Staff_name, Staff.Position, AES_DECRYPT(Staff.Email, :aeskey) as Email
     FROM Results
+    JOIN Orders
+	ON Results.Order_id = Orders.Order_id
     LEFT OUTER JOIN Staff
-    ON Results.Staff_id = Staff.Staff_id";
+	ON Orders.Staff_id = Staff.Staff_id";
 
     //prevent SQL injection
     $stmt = $pdo->prepare($query);
@@ -140,6 +136,33 @@ function deleteAppointment(object $pdo, int $rowIndex) {
 }
 
 //for order
+function updateOrder(object $pdo, string $Order_id, string $Order_date, string $Status, string $Patient_name, string $Staff_name, string $Test_id) {
+
+    $query = "UPDATE Orders SET Order_date = :Order_date, Status = :Status, Patient_id = (SELECT Patient_id FROM Patients WHERE Patient_name = :Patient_name), Staff_id = (SELECT Staff_id FROM Staff WHERE Staff_name = :Staff_name), Test_id = :Test_id WHERE Order_id = :Order_id;";
+    
+    //prevent SQL injection
+    $stmt = $pdo->prepare($query);
+
+    $data = [
+        'Order_id' => $Order_id,
+        'Order_date' => $Order_date,
+        'Status' => $Status,
+        'Patient_name' => $Patient_name,
+        'Staff_name' => $Staff_name,
+        'Test_id' => $Test_id,
+    ];
+
+    // $stmt->bindParam(":Order_id", $Order_id);
+    // $stmt->bindParam(":Order_date", $Order_date);
+    // $stmt->bindParam(":Status", $Status);
+    // $stmt->bindParam(":Patient_name", $Patient_name);
+    // $stmt->bindParam(":Staff_name", $Staff_name);
+    // $stmt->bindParam(":Test_id", $Test_id);
+    $stmt->execute($data);
+
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);//get the first result
+    return $result;
+}
 function insertOrder(object $pdo, string $Order_date, string $Status, string $Patient_name, string $Staff_name, ?string $Test_id) {
 
     $query = "INSERT INTO Orders (Order_date, Status, Patient_id, Staff_id, Test_id) VALUES (:Order_date, :Status, (SELECT Patient_id FROM Patients WHERE Patient_name = :Patient_name), (SELECT Staff_id FROM Staff WHERE Staff_name = :Staff_name), :Test_id);";

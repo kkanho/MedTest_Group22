@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-function getPatientsSamplingType(object $pdo): array {
+function getPatientsSamplingType(object $pdo, string $Staff_id): array {
 
     
 
@@ -11,14 +11,17 @@ function getPatientsSamplingType(object $pdo): array {
     // LEFT OUTER JOIN Patients
     // ON Appointments.Patient_id = Patients.Patient_id";
 
-    $query = "SELECT Orders.Order_id, Orders.Status, Orders.Order_date, Patients.Patient_name
+    $query = "SELECT Orders.Order_id, Tests.Test_name, Orders.Status, Orders.Order_date, Patients.Patient_name
     FROM Orders
     LEFT OUTER JOIN Patients
-    ON Orders.Patient_id = Patients.Patient_id;";
+    ON Orders.Patient_id = Patients.Patient_id
+    LEFT OUTER JOIN Tests
+    ON Orders.Test_id = Tests.Test_id
+    WHERE Orders.Staff_id = :Staff_id;";
 
     //prevent SQL injection
     $stmt = $pdo->prepare($query);
-
+    $stmt->bindParam(":Staff_id", $Staff_id);
     $stmt->execute();
 
     $result = [];
@@ -42,15 +45,19 @@ function getLabTest(object $pdo): array {
     $result = $stmt->fetchAll();
     return $result;
 }
-function getPatientsResult(object $pdo): array {
+function getPatientsResult(object $pdo, string $Staff_id): array {
 
-    $query = "SELECT Result_id, Report_url, Interpretation, Order_id, Staff_id FROM Results";
+    $query = "SELECT Results.Result_id, Results.Report_url, Results.Interpretation, Results.Order_id
+    FROM Results 
+    LEFT OUTER JOIN Orders 
+    ON Results.Order_id = Orders.Order_id 
+    WHERE Orders.Staff_id = :Staff_id;";
 
     //prevent SQL injection
     $stmt = $pdo->prepare($query);
-
+    $stmt->bindParam(":Staff_id", $Staff_id);
     $stmt->execute();
-
+    
     $result = [];
 
     // $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -95,26 +102,9 @@ function deleteLabTest(object $pdo, int $rowIndex) {
 
 
 
-// function insertPatientResult(object $pdo, string $Report_url, string $Interpretation, int $Order_id) {
+function insertPatientResult(object $pdo, string $Report_url, string $Interpretation, int $Order_id) {
 
-//     $query = "INSERT INTO Results (Report_url, Interpretation, Order_id) VALUES (:Report_url, :Interpretation, :Order_id);";
-    
-//     //prevent SQL injection
-//     $stmt = $pdo->prepare($query);
-
-
-//     $stmt->bindParam(":Report_url", $Report_url);
-//     $stmt->bindParam(":Interpretation", $Interpretation);
-//     $stmt->bindParam(":Order_id", $Order_id);
-//     $stmt->execute();
-
-//     $result = $stmt->fetch(PDO::FETCH_ASSOC);//get the first result
-//     return $result;
-
-// }
-function insertPatientResult(object $pdo, string $Report_url, string $Interpretation) {
-
-    $query = "INSERT INTO Results (Report_url, Interpretation) VALUES (:Report_url, :Interpretation);";
+    $query = "INSERT INTO Results (Report_url, Interpretation, Order_id) VALUES (:Report_url, :Interpretation, :Order_id);";
     
     //prevent SQL injection
     $stmt = $pdo->prepare($query);
@@ -122,13 +112,30 @@ function insertPatientResult(object $pdo, string $Report_url, string $Interpreta
 
     $stmt->bindParam(":Report_url", $Report_url);
     $stmt->bindParam(":Interpretation", $Interpretation);
-
+    $stmt->bindParam(":Order_id", $Order_id);
     $stmt->execute();
 
     $result = $stmt->fetch(PDO::FETCH_ASSOC);//get the first result
     return $result;
 
 }
+// function insertPatientResult(object $pdo, string $Report_url, string $Interpretation) {
+
+//     $query = "INSERT INTO Results (Report_url, Interpretation) VALUES (:Report_url, :Interpretation);";
+    
+//     //prevent SQL injection
+//     $stmt = $pdo->prepare($query);
+
+
+//     $stmt->bindParam(":Report_url", $Report_url);
+//     $stmt->bindParam(":Interpretation", $Interpretation);
+
+//     $stmt->execute();
+
+//     $result = $stmt->fetch(PDO::FETCH_ASSOC);//get the first result
+//     return $result;
+
+// }
 function deletePatientResult(object $pdo, int $rowIndex) {
 
     $query = "DELETE FROM Results WHERE Result_id = :rowIndex;";

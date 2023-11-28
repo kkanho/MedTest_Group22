@@ -18,7 +18,7 @@ $("#appointment_data_output_head").hide();
                 <td>${checkEmptyBlock(row.Patient_name)}</td>
                 <td>${checkEmptyBlock(row.Email)}</td>
                 <td>
-                    <button class="btn btn-outline-danger" id="${row.Appointment_id}" type="button" onclick="deleteAppointmentRow(this)">Delete</button>
+                    <button class="btn btn-outline-danger w-100" id="${row.Appointment_id}" type="button" onclick="deleteAppointmentRow(this)">Delete</button>
                 </td>
             </tr>`;
         }
@@ -26,13 +26,13 @@ $("#appointment_data_output_head").hide();
         $('#appointmentTable tr:last').after(`
             <tr>
                 <td>#</td>
-                <td><input type="text" class="form-control" placeholder="Test Type" name="Sampling_type" id="Sampling_type"></td>
+                <td><input type="text" class="form-control shadow-sm" placeholder="Test Type" name="Sampling_type" id="Sampling_type"></td>
                 <td>
-                    <input type="datetime-local" my-date-format="DD/MM/YYYY, hh:mm:ss" class="form-control" placeholder="some description" name="Appointments_datetime" id="Appointments_datetime">
+                    <input type="datetime-local" my-date-format="DD/MM/YYYY, hh:mm:ss" class="form-control shadow-sm" placeholder="some description" name="Appointments_datetime" id="Appointments_datetime">
                 </td>
-                <td><input type="text" class="form-control" placeholder="Patient Name" name="Patient_name" id="Patient_name"></td>
+                <td><input type="text" class="form-control shadow-sm" placeholder="Patient Name" name="Patient_name" id="Patient_name"></td>
                 <td colspan="2">
-                    <button class="btn btn-outline-success w-100" id="appointment_newRow" type='submit' form="insertAppointment">Add Appointment</button>
+                    <button class="btn btn-outline-success w-100" id="appointment_newRow" type='submit' form="insertAppointment">Add</button>
                 </td>
             </tr>
         `)

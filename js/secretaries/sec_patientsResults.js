@@ -19,7 +19,7 @@ $("#sec_patients_results_head").hide();
                 <td>${checkEmptyBlock(row.Staff_name)} [${checkEmptyBlock(row.Position)}]</td>
                 <td>${checkEmptyBlock(row.Email)}</td>
                 <td>
-                    <button class="btn btn-outline-danger" id="${row.Result_id}" type="button" onclick="deleteResultRow(this)">Delete</button>
+                    <button class="btn btn-outline-danger w-100" id="${row.Result_id}" type="button" onclick="deleteResultRow(this)">Delete</button>
                 </td>
             </tr>`;
         }
@@ -27,12 +27,12 @@ $("#sec_patients_results_head").hide();
         $('#resultTable tr:last').after(`
             <tr>
                 <td>#</td>
-                <td><input type="text" class="form-control" placeholder="URL" name="Report_url" id="Report_url"></td>
-                <td><input type="text" class="form-control" placeholder="Interpretation" name="Interpretation" id="Interpretation"></td>
-                <td><input type="text" class="form-control" placeholder="" name="Order_id" id="Order_id"></td>
-                <td><input type="text" class="form-control" placeholder="Staff Name" name="Staff_name" id="Staff_name"></td>
+                <td><input type="text" class="form-control shadow-sm" placeholder="URL" name="Report_url" id="Report_url"></td>
+                <td><input type="text" class="form-control shadow-sm" placeholder="Interpretation" name="Interpretation" id="Interpretation"></td>
+                <td><input type="text" class="form-control shadow-sm" placeholder="" name="Order_id" id="Order_id"></td>
+                <td><input type="text" class="form-control shadow-sm" placeholder="Staff Name" name="Staff_name" id="Staff_name"></td>
                 <td colspan="2">
-                    <button class="btn btn-outline-success w-100" id="result_newRow" type='submit' form="insertResult">Add Result</button>
+                    <button class="btn btn-outline-success w-100" id="result_newRow" type='submit' form="insertResult">Add</button>
                 </td>
             </tr>
         `)
@@ -57,8 +57,7 @@ function deleteResultRow(row) {
         body: formData
     })
     .then(response => {
-        // console.log(response.url);
-        // alert("Remove Successful, refresh now")
+
         location.replace(response.url);
     });
 }

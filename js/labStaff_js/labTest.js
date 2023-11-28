@@ -21,7 +21,7 @@ $("#labTest_newRow").hide();
                 <td>${checkEmptyBlock(row.Description)}</td>
                 <td>${formatting.format(checkEmptyBlock(row.Cost))}</td>
                 <td>
-                    <button class="btn btn-outline-danger" id="${row.Test_id}" type='button' onclick="deleteLabTestRow(this)">Delete</button>
+                    <button class="btn btn-outline-danger w-100" id="${row.Test_id}" type='button' onclick="deleteLabTestRow(this)">Delete</button>
                 </td>
             </tr>`;
         }
@@ -29,12 +29,12 @@ $("#labTest_newRow").hide();
         $('#labTestTable tr:last').after(`
             <tr>
                 <td>#</td>
-                <td><input type="text" class="form-control" placeholder="test999" name="Test_code" id="Test_code"></td>
-                <td><input type="text" class="form-control" placeholder="S-Test" name="Test_name" id="Test_name"></td>
-                <td><input type="text" class="form-control" placeholder="some description" name="Description" id="Description"></td>
-                <td><input type="text" class="form-control" placeholder="1000" name="Cost" id="Cost"></td>
+                <td><input type="text" class="form-control shadow-sm" placeholder="test999" name="Test_code" id="Test_code"></td>
+                <td><input type="text" class="form-control shadow-sm" placeholder="S-Test" name="Test_name" id="Test_name"></td>
+                <td><input type="text" class="form-control shadow-sm" placeholder="some description" name="Description" id="Description"></td>
+                <td><input type="text" class="form-control shadow-sm" placeholder="1000" name="Cost" id="Cost"></td>
                 <td>
-                    <button class="btn btn-outline-success w-100" id="labTest_newRow" type='submit' form="insertLabTest">Add Test</button>
+                    <button class="btn btn-outline-success w-100" id="labTest_newRow" type='submit' form="insertLabTest">Add</button>
                 </td>
             </tr>
         `)

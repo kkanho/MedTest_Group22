@@ -16,7 +16,7 @@ $("#availableTest_data_output_head").hide();
                 <td>${checkEmptyBlock(row.Test_code)}</td>
                 <td>${checkEmptyBlock(row.Test_name)}</td>
                 <td>${checkEmptyBlock(row.Description)}</td>
-                <td>${checkEmptyBlock(row.Cost)}</td>
+                <td>${formatting.format(checkEmptyBlock(row.Cost))}</td>
             </tr>`;
         }
         placeholder.innerHTML = out;

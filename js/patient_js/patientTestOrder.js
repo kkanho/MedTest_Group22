@@ -13,6 +13,7 @@ $("#patient_test_order_data_output_head").hide();
             for(let row of data){
                 out += `<tr>
                     <th scope="row">${checkEmptyBlock(row.Order_id)}</th>
+                    <td>${checkEmptyBlock(row.Test_name)}</td>
                     <td>${checkEmptyBlock(row.Order_date)}</td>
                     <td>${checkEmptyBlock(row.Status)}</td>
                 </tr>`;

@@ -6,7 +6,7 @@ function getUserPersonalData(object $pdo, string $username): array {
 
     $aesKey = "GThKyaCpvHWlh9OW"; //128bit aes key
 
-    $query = "SELECT AES_DECRYPT(Email, :aeskey) as Email, Patient_id, Patient_name, Created_at FROM Patients WHERE Patient_name = :username;";
+    $query = "SELECT AES_DECRYPT(Email, :aeskey) as Email, Patient_id, Patient_name, Created_at, DOB, Insurance FROM Patients WHERE Patient_name = :username;";
     
     //prevent SQL injection
     $stmt = $pdo->prepare($query);
@@ -23,10 +23,10 @@ function getUserPersonalData(object $pdo, string $username): array {
 }
 function getUserTestOrder(object $pdo, string $username): array {
 
-    $query = "SELECT Orders.Order_id, Orders.Order_date, Orders.Status
+    $query = "SELECT Orders.Order_id, Orders.Order_date, Orders.Status, Tests.Test_name
     FROM Orders 
-    LEFT OUTER JOIN Results
-    ON Orders.Order_id = Results.Order_id
+    LEFT OUTER JOIN Tests
+    ON Orders.Test_id = Tests.Test_id
     WHERE Patient_id = (SELECT Patient_id FROM Patients WHERE Patient_name = :username);";
     
     //prevent SQL injection
@@ -47,8 +47,8 @@ function getUserTestResult(object $pdo, string $username): array {
     FROM Orders 
     JOIN Results
     ON Orders.Order_id = Results.Order_id
-    JOIN Staff
-    ON Results.Staff_id = Staff.Staff_id
+    LEFT OUTER JOIN Staff
+    ON Orders.Staff_id = Staff.Staff_id
     WHERE Patient_id = (SELECT Patient_id FROM Patients WHERE Patient_name = :username);";
     
     //prevent SQL injection
