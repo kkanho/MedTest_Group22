@@ -168,7 +168,7 @@ function checkInsertAppointmentErrors() {
 
         unset($_SESSION["errors_insertAppointment"]);
     } else if(isset($_GET["insertAppointment"])  && $_GET["insertAppointment"] === "success") {
-        echo '<div class="form-error text-success mb-2">Insert patient result successful!</div>';
+        echo '<div class="form-error text-success mb-2">Insert appointment successful!</div>';
     }
 }
 function checkDeleteAppointmentErrors() {
@@ -181,7 +181,7 @@ function checkDeleteAppointmentErrors() {
 
         unset($_SESSION["errors_deleteAppointment"]);
     } else if(isset($_GET["deleteAppointment"])  && $_GET["deleteAppointment"] === "success") {
-        echo '<div class="form-error text-success mb-2">Delete patient result successful!</div>';
+        echo '<div class="form-error text-success mb-2">Delete appointment successful!</div>';
     }
 }
 
@@ -195,7 +195,7 @@ function checkInsertOrderErrors() {
 
         unset($_SESSION["errors_insertOrder"]);
     } else if(isset($_GET["insertOrder"])  && $_GET["insertOrder"] === "success") {
-        echo '<div class="form-error text-success mb-2">Insert patient result successful!</div>';
+        echo '<div class="form-error text-success mb-2">Insert order successful!</div>';
     }
 }
 function checkDeleteOrderErrors() {
@@ -208,7 +208,7 @@ function checkDeleteOrderErrors() {
 
         unset($_SESSION["errors_deleteOrder"]);
     } else if(isset($_GET["deleteOrder"])  && $_GET["deleteOrder"] === "success") {
-        echo '<div class="form-error text-success mb-2">Delete patient result successful!</div>';
+        echo '<div class="form-error text-success mb-2">Delete order successful!</div>';
     }
 }
 function checkUpdateOrderErrors() {
