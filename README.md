@@ -6,7 +6,7 @@ A docker-compose stack to set up a LAMP stack
 ## Available Scripts
 ```sh
 #Clone this repository or unzip the repository(MedTest_Group22)
-git clone https://github.com/kkanho/Group_22.git
+git clone https://github.com/kkanho/MedTest_Group22
 
 #change to the correct directory
 cd MedTest_Group22
