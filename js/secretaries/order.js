@@ -87,7 +87,7 @@ function deleteOrderRow(row) {
 
     let formData = new FormData();
     formData.append('orderRowIndex', id);
-    fetch('/includes/secretaries/order.inc.php', {
+    fetch('/includes/secretaries/orderDelete.inc.php', {
         method: 'POST',
         body: formData
     })

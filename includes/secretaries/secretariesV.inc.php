@@ -4,7 +4,7 @@ function patientsAppointment() {
     echo '
         <a id="appointment_section"></a><br><br>
         <div class="row pt-4">
-            <div class="col-12 table-responsive card shadow">
+            <div class="col-12 table-responsive card shadow bg-light">
             <form action="includes/secretaries/appointment.inc.php" method="post" id="insertAppointment">
                 <table class="table table-striped table-hover mt-3" id="appointmentTable">
                     <thead id="appointment_data_output_head">
@@ -34,7 +34,7 @@ function availableTest() {
     echo '
         <a id="test_section"></a><br><br>
         <div class="row pt-4">
-            <div class="col-12 table-responsive card shadow">
+            <div class="col-12 table-responsive card shadow bg-light">
 
                 <table class="table table-striped table-hover mt-3" id="availableTestTable">
                     <thead id="availableTest_data_output_head">
@@ -65,7 +65,7 @@ function order() {
     echo '
         <a id="order_section"></a><br><br>
         <div class="row pt-4">
-            <div class="col-12 table-responsive card shadow">
+            <div class="col-12 table-responsive card shadow bg-light">
                 <form action="includes/secretaries/order.inc.php" method="post" id="insertOrder">
                     <table class="table table-striped table-hover mt-3" id="orderTable">
                         <thead id="order_data_output_head">
@@ -98,7 +98,7 @@ function sec_PatientsResults() {
     echo '
         <a id="patientsResult_section"></a><br><br>
         <div class="row pt-4">
-            <div class="col-12 table-responsive card shadow">
+            <div class="col-12 table-responsive card shadow bg-light">
                 <form action="includes/secretaries/sec_patientsResults.inc.php" method="post" id="insertResult">
                     <table class="table table-striped table-hover mt-3" id="resultTable">
                         <thead id="sec_patients_results_head">
@@ -130,7 +130,7 @@ function patientsBilling() {
     echo '
         <a id="billing_section"></a><br><br>
         <div class="row pt-4">
-            <div class="col-12 table-responsive card shadow">
+            <div class="col-12 table-responsive card shadow bg-light">
                 <form action="includes/secretaries/billing.inc.php" method="post" id="insertBilling">
                     <table class="table table-striped table-hover mt-3" id="billingTable">
                         <thead id="billing_data_output_head">

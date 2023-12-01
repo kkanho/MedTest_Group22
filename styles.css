@@ -1,13 +1,34 @@
-body {
-    /* overflow: hidden; */
-}
-
 .center-screen {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     min-height: 100dvh;
+}
+
+.transparentItem {
+    background-color: rgba(255, 255, 255, 0.5) !important; 
+}
+
+.transparent-input {
+    background-color: rgba(0, 0, 0, 0);
+    border:none;
+}
+
+.background {
+    background-image: url('./bg004.webp'); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.background-tint {
+    background-color: rgba(50, 50, 50, 0.55);
+    background-blend-mode: multiply;
+}
+
+.roundedBtn {
+    border-radius: 2rem;
 }
 
 .nav-link {
@@ -28,4 +49,20 @@ body {
 }
 .nav-link:hover::after {
     opacity: 1;
+}
+
+.sliderFromBottom {
+    animation: 1.25s sliderFromBottom;
+    margin-top: 1rem;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes sliderFromBottom {
+    from {
+        margin-top: 150%;
+        height: 500%;
+    } to {
+        margin-top: 1rem;
+        height: 100%;
+    }
 }

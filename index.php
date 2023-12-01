@@ -51,7 +51,7 @@
     <link rel="stylesheet" type="text/css" href="./styles.css" /> 
     <title>Group_22</title>
 </head>
-<body>
+<body class="background background-tint">
     
     <div class="<?php if(!$isLogin) { ?>container center-screen <?php } ?>">
         <script>
@@ -63,13 +63,15 @@
 
             <!-- Signup Form -->
             <div class="container col-sm-10 col-md-6 col-xl-4 mt-4 mb-4" id="signupForm">
-                <div class="card shadow">
+                <div class="card shadow transparentItem pt-5 pd-4">
                     <div class="card-body p-5">            
                         <form action="includes/signup/signup.inc.php" method="post">
                             <h1 class="row mb-4 justify-content-center">Signup</h1>
                             <?php signupInput(); ?>
                             <?php //checkSignupErrors(); ?>
-                            <button class="btn btn-outline-primary w-100 mb-2" id="signupBtn">Signup</button>
+                            <div class="d-flex justify-content-center">
+                                <button class="btn btn-outline-primary w-50 mt-3 mb-2 roundedBtn" id="signupBtn">Signup</button>
+                            </div>
                         </form>
                         <span>
                             Already have an account?
@@ -82,27 +84,27 @@
 
             <!-- Login Form -->
             <div class="container col-sm-10 col-md-6 col-xl-4 mt-4 mb-4" id="loginForm">
-                <div class="card shadow">
+                <div class="card shadow transparentItem pt-5 pb-4">
                     <div class="card-body p-5">            
                         <form action="includes/login/login.inc.php" method="post">
                             <h1 class="row mb-4 justify-content-center">Login</h1>
                             <div class="form-floating mb-2">
-                                <input class="form-control shadow-sm" id="username" name="username" placeholder="Username">
+                                <input class="form-control shadow transparent-input" id="username" name="username" placeholder="Username">
                                 <label for="username" class="form-label">Username</label>
                             </div>
                             <div class="form-floating mb-2">
-                                <input class="form-control shadow-sm" id="password" name="password" placeholder="Password">
+                                <input class="form-control shadow transparent-input" id="password" name="password" placeholder="Password">
                                 <label for="password" class="form-label">Password</label>
                             </div>
                             <div class="pb-2" >
-                                <select class="form-select" id="role" name="role" style="height:3.5rem;">
+                                <select class="form-select shadow transparent-input" id="role" name="role" style="height:3.5rem;">
                                     <option selected value="1">Patients</option>
                                     <option value="2">Staff</option>
                                 </select>
                             </div>
                             <?php //checkLoginErrors(); ?>
                             <div class="d-flex justify-content-center">
-                                <button class="btn btn-outline-primary w-100 mb-2" id="loginBtn">Login</button>
+                                <button class="btn btn-outline-primary w-50 mt-3 mb-2 roundedBtn" id="loginBtn">Login</button>
                             </div>
                         </form>
                         <span>
@@ -121,7 +123,7 @@
                 <div class="row">
 
                 <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
-                <div class="col-10 py-3 position-absolute end-0 px-2 py-sm-5 px-sm-5">
+                <div class="col-10 py-3 position-absolute end-0 px-2 py-sm-5 px-sm-5 sliderFromBottom">
 
                     <?php 
                         if ($isPatient) {

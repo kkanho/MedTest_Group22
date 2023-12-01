@@ -151,13 +151,7 @@ function updateOrder(object $pdo, string $Order_id, string $Order_date, string $
         'Staff_name' => $Staff_name,
         'Test_id' => $Test_id,
     ];
-
-    // $stmt->bindParam(":Order_id", $Order_id);
-    // $stmt->bindParam(":Order_date", $Order_date);
-    // $stmt->bindParam(":Status", $Status);
-    // $stmt->bindParam(":Patient_name", $Patient_name);
-    // $stmt->bindParam(":Staff_name", $Staff_name);
-    // $stmt->bindParam(":Test_id", $Test_id);
+    
     $stmt->execute($data);
 
     $result = $stmt->fetch(PDO::FETCH_ASSOC);//get the first result

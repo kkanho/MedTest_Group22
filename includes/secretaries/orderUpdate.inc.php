@@ -6,15 +6,15 @@ $getRequest = $_SERVER["REQUEST_METHOD"] === "GET";
 $postRequest = $_SERVER["REQUEST_METHOD"] === "POST";
 $isLogin = isset($_SESSION["user_id"]);
 $secretaries = isset($_SESSION["role"]) && $_SESSION["role"] === "secretaries";
-$dataToOrder = isset($_POST["Order_date"]) || isset($_POST["Status"]) || isset($_POST["Patient_name"]) || isset($_POST["Staff_name"]) || isset($_POST["Test_id"]);
-$update = isset($_Post["Order_id_update"]);
+$dataToOrderUpdate = isset($_POST["Order_date"]) || isset($_POST["Status"]) || isset($_POST["Patient_name"]) || isset($_POST["Staff_name"]) || isset($_POST["Test_id"]) || isset($_Post["Order_id_update"]);
+
 
 if ($postRequest) {
     if (!($isLogin && $secretaries)) {//make sure user is logged in and their role is secretaries
         backToHome();
     }
 
-    // if ($dataToOrder && $update) { //update data in the Order table
+    if ($dataToOrderUpdate) { //update data in the Order table else {
         $Order_id = htmlspecialchars($_POST["Order_id_update"]);
         $Order_date = htmlspecialchars($_POST["Order_date"]);
         $Status = htmlspecialchars($_POST["Status"]);
@@ -29,7 +29,6 @@ if ($postRequest) {
             require_once 'secretariesV.inc.php';
             require_once 'secretariesC.inc.php';
             
-
             //Handle errors
             $ERRORS = [];
             
@@ -57,7 +56,7 @@ if ($postRequest) {
             if ($ERRORS) {
                 $_SESSION["errors_updateOrder"] = $ERRORS;
     
-                header("Location: ../../index.php");
+                backToHome();
                 die();
             }
 
@@ -69,17 +68,18 @@ if ($postRequest) {
             $stmt = null;
             die();
 
-        }  catch (PDOException $e) {
+        } catch (PDOException $e) {
             die("Query error: " . $e->getMessage());
-        }
-
+        } 
+    } else {
+        $ERRORS = [];
+        $ERRORS["Update_Fail"] = 'Wrong input!';
+        $_SESSION["errors_updateOrder"] = $ERRORS;
+        die();
     }
+}
 
-// }
-
-
-// backToHome();
-
+backToHome();
 
 
 function backToHome() {

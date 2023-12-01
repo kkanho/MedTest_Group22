@@ -5,7 +5,7 @@ function patientsSamplingType() {
     echo '
         <a id="sampling_section"></a><br><br>
         <div class="row pt-4">
-            <div class="col-12 table-responsive card shadow">
+            <div class="col-12 table-responsive card shadow bg-light">
                 <table class="table table-striped table-hover mt-3" id="patientsSamplingTable">
                     <thead id="sampling_type_data_output_head">
                         <tr class="col-6 col-md-2">
@@ -33,7 +33,7 @@ function labTest() {
     echo '
         <a id="labTest_section"></a><br><br>
         <div class="row pt-4">
-            <div class="col-12 table-responsive card shadow">
+            <div class="col-12 table-responsive card shadow bg-light">
                 <form action="includes/labStaff/labTest.inc.php" method="post" id="insertLabTest">
                     <table class="table table-striped table-hover mt-3" id="labTestTable">
                         <thead id="lab_test_head">
@@ -67,7 +67,7 @@ function patientsResults() {
     echo '
         <a id="patientsResult_section"></a><br><br>
         <div class="row pt-4">
-            <div class="col-12 table-responsive card shadow">
+            <div class="col-12 table-responsive card shadow bg-light">
                 <form action="includes/labStaff/patientsResults.inc.php" method="post" id="insertPatientResult">
                     <table class="table table-striped table-hover mt-3" id="patientsResultsTable">
                         <thead id="patients_results_head">

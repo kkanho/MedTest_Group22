@@ -6,7 +6,7 @@ function patientPersonalInfo() {
         <div>
         <a id="patientData_section"></a>
         <div class="row pt-4">
-            <div class="col-12 table-responsive card shadow">
+            <div class="col-12 table-responsive card shadow bg-light">
                 <table class="table table-striped table-hover mt-3">
                     <thead id="patient_info_data_output_head">
                         <tr class="col-6 col-md-2">
@@ -37,7 +37,7 @@ function patientTestOrder() {
     echo '
         <a id="testOrder_section"></a><br><br>
         <div class="row pt-4">
-            <div class="col-12 table-responsive card shadow">
+            <div class="col-12 table-responsive card shadow bg-light">
                 <table class="table table-striped table-hover mt-3">
                     <thead id="patient_test_order_data_output_head">
                         <tr class="col-6 col-md-2">
@@ -65,7 +65,7 @@ function patientTestResult() {
     echo '
         <a id="testResult_section"></a><br><br>
         <div class="row pt-4">
-            <div class="col-12 table-responsive card shadow">
+            <div class="col-12 table-responsive card shadow bg-light">
                 <table class="table table-striped table-hover mt-3">
                 <thead id="patient_test_result_data_output_head">
                     <tr class="col-6 col-md-2">
@@ -93,7 +93,7 @@ function patientBill() {
     echo '
         <a id="bill_section"></a><br><br>
         <div class="row pt-4">
-            <div class="col-12 table-responsive card shadow">
+            <div class="col-12 table-responsive card shadow bg-light">
                 <table class="table table-striped table-hover mt-3">
                     <thead id="bill_data_output_head">
                         <tr class="col-6 col-md-2">

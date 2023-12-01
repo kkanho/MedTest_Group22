@@ -24,18 +24,18 @@ $("#sec_patients_results_head").hide();
             </tr>`;
         }
         placeholder.innerHTML = out;
-        $('#resultTable tr:last').after(`
-            <tr>
-                <td>#</td>
-                <td><input type="text" class="form-control shadow-sm" placeholder="URL" name="Report_url" id="Report_url"></td>
-                <td><input type="text" class="form-control shadow-sm" placeholder="Interpretation" name="Interpretation" id="Interpretation"></td>
-                <td><input type="text" class="form-control shadow-sm" placeholder="" name="Order_id" id="Order_id"></td>
-                <td><input type="text" class="form-control shadow-sm" placeholder="Staff Name" name="Staff_name" id="Staff_name"></td>
-                <td colspan="2">
-                    <button class="btn btn-outline-success w-100" id="result_newRow" type='submit' form="insertResult">Add</button>
-                </td>
-            </tr>
-        `)
+        // $('#resultTable tr:last').after(`
+        //     <tr>
+        //         <td>#</td>
+        //         <td><input type="text" class="form-control shadow-sm" placeholder="URL" name="Report_url" id="Report_url"></td>
+        //         <td><input type="text" class="form-control shadow-sm" placeholder="Interpretation" name="Interpretation" id="Interpretation"></td>
+        //         <td><input type="text" class="form-control shadow-sm" placeholder="" name="Order_id" id="Order_id"></td>
+        //         <td><input type="text" class="form-control shadow-sm" placeholder="Staff Name" name="Staff_name" id="Staff_name"></td>
+        //         <td colspan="2">
+        //             <button class="btn btn-outline-success w-100" id="result_newRow" type='submit' form="insertResult">Add</button>
+        //         </td>
+        //     </tr>
+        // `)
     })
     .catch (e => {
         console.log("Error:", e)
