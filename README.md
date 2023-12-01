@@ -1,6 +1,6 @@
 # MedTest ![Static Badge](https://img.shields.io/badge/html-%23fff?logo=html5) ![Static Badge](https://img.shields.io/badge/css-%23563D7C?logo=css3) ![Static Badge](https://img.shields.io/badge/JavaScript-%23fff?logo=JavaScript) ![Static Badge](https://img.shields.io/badge/PHP-%23fff?logo=PHP) ![Static Badge](https://img.shields.io/badge/docker-%23384d54?logo=docker)
 
-### _MedTest - Group_22
+### MedTest - Group_22
 A docker-compose stack to set up a LAMP stack
 
 ## Available Scripts
