@@ -24,8 +24,9 @@ SET time_zone = "+00:00";
 
 -- --------------------------------------------------------
 
-
-SET GLOBAL general_log = 'ON';
+-- enable log
+SET global general_log = 1;
+SET global log_output = 'table';
 
 -- Patients 
 CREATE TABLE Patients (
