@@ -17,7 +17,7 @@ services:
   www:        #apache
     depends_on:
       - database
-    image: php:8.1.1-apache
+    image: php:8.2-apache
     build: ./php_custom_lib
     volumes:
       - "./:/var/www/html"
