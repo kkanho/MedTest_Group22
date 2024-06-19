@@ -3,6 +3,9 @@
 ### MedTest - Group_22
 A docker-compose stack to set up a LAMP stack
 
+# Demonstration videos:
+[![ATM demo](https://img.youtube.com/vi/n8LlYjFBt0w/0.jpg)](https://www.youtube.com/watch?v=n8LlYjFBt0w)
+
 ## Available Scripts
 ```sh
 #Clone this repository or unzip the repository(MedTest_Group22)
